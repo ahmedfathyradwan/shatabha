@@ -1,0 +1,81 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    padding: 3rem 2rem;
+    width: calc(100% - 4rem);
+    gap: 2rem;
+    margin: 3rem 2rem 12rem;
+    background-color: var(--backgroundColor);
+    border-radius: var(--br5);
+  }
+  
+  .title {
+    font-size: var(--fs-h4);
+    color: var(--primaryColor);
+    text-align: center;
+    width: 100%;
+  }
+  
+  .card {
+  /* width: calc(100% / 2.2); */
+  width: 100%;
+      aspect-ratio: 7 / 6;
+    border-radius: var(--br5);
+    overflow: hidden;
+    background-color: var(--whiteColor);
+    border: 1px solid var(--primaryColor);
+  }
+  
+  .cardImage {
+    width: 100%;
+    height: 75%;
+    object-fit: cover;
+  }
+  
+  .cardFooter {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 1.5rem 0.8rem;
+    margin-top: -0.5rem;
+    background: var(--whiteColor);
+  }
+  
+  .cardFooter.checked {
+    background: var(--primaryColor);
+    color: var(--whiteColor);
+  }
+  
+  .cardTitle {
+    font-size: var(--fs-small);
+    font-weight: 600;
+  }
+  
+  .checkBox {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid var(--primaryColor);
+    border-radius: var(--br5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: var(--whiteColor);
+  }
+  
+  .checkBox.activeBox {
+    background: var(--primaryColor);
+    border-color: var(--whiteColor);
+  }
+  
+  .checkMark {
+    font-size: var(--fs-small);
+    color: var(--whiteColor);
+    font-weight: 500;
+  }
+  

@@ -1,0 +1,57 @@
+.aboutUsSection {
+  width: calc(100% - 4rem);
+  text-align: center;
+  padding: 3rem;
+  margin: 0 2rem 3rem;
+  background-color: var(--backgroundColor);
+  border-radius: var(--br5);
+}
+
+.title {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  margin-bottom: 3rem;
+  color: var(--primaryColor);
+  font-family: var(--ar);
+}
+
+.logo {
+  margin: 0 auto;
+  width: 8rem;
+  height: auto;
+}
+
+.shatab {
+  font-size: var(--fs-h4);
+  font-family: var(--en);
+  font-weight: 600;
+  color: var(--primaryColor);
+  margin: 0 0 0.5rem;
+}
+
+.shatabSpan {
+  font-size: var(--fs-body);
+  font-weight: 400;
+  font-family: var(--en);
+}
+
+.description {
+  font-size: var(--fs-body);
+  font-weight: 400;
+  font-family: var(--ar);
+}
+
+@media (min-width: 768px) {
+  .aboutUsSection {
+    padding: 4rem;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .aboutUsSection {
+    padding: 6rem;
+    max-width: 1000px;
+  }
+}

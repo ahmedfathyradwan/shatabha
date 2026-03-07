@@ -1,0 +1,156 @@
+.container {
+  background-color: var(--backgroundColor);
+  margin: 3rem 2rem 10rem;
+  border-radius: var(--br5);
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(100% - 4rem);
+  max-width: 1000px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  margin-inline: auto;
+}
+
+/* 🏷 العنوان */
+.title {
+  text-align: center;
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  color: var(--primaryColor);
+  margin-bottom: 0.8rem;
+}
+
+/* ✏️ الوصف */
+.description {
+  font-size: 1.2rem;
+  color: var(--textColor, #333);
+  margin-top: 0.5rem;
+  line-height: 1.8;
+  max-width: 700px;
+  text-align: center;
+}
+
+/* 🖼️ الصورة */
+.imageCont {
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--br5);
+  margin: 2rem 0;
+  border: 2px solid var(--primaryColor);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--br5);
+  display: block;
+}
+
+/* 📄 النصوص والمحتوى */
+.textCont {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding-top: 2rem;
+  width: 100%;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* 🔹 العناوين الفرعية */
+.subTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primaryColor);
+  border-right: 5px solid var(--primaryColor);
+  padding-right: 0.6rem;
+}
+
+/* 🔸 النصوص العامة */
+.text {
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.8;
+  color: var(--textColor, #333);
+  margin-right: 0.5rem;
+}
+
+/* 🚫 حالة الخطأ أو عدم العثور */
+.notFound {
+  padding: 2rem;
+  color: red;
+  font-size: var(--fs-body);
+  text-align: center;
+}
+
+/* 📝 القوائم */
+.tasksList {
+  margin: 0;
+  padding-right: 1.5rem;
+  list-style-type: disc;
+}
+
+.tasksList li {
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  line-height: 1.8;
+  color: var(--textColor, #333);
+}
+
+/* 🔗 الروابط داخل القوائم */
+.link {
+  color: var(--backgroundColor);
+  background-color: var(--primaryColor);
+  border: 1px solid var(--primaryColor);
+  border-radius: var(--br5);
+  padding: 0.2rem 0.9rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  font-weight: 500;
+  margin-right: 0.3rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.link:hover {
+  color: var(--primaryColor);
+  background-color: var(--backgroundColor);
+  border-color: var(--primaryColor);
+}
+.taskImage {
+  width: 50%;
+  border-radius: var(--br5);
+  margin-top: 1rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+/* ⚙️ زر اختيار المنفذ */
+.serviceBtn {
+  background-color: var(--primaryColor);
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.6rem;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 1.05rem;
+  margin-top: 1.5rem;
+  align-self: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.serviceBtn:hover {
+  background-color: #0056b3;
+  transform: scale(1.04);
+}
+

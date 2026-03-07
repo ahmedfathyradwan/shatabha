@@ -1,0 +1,238 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  background-color: var(--backgroundColor);
+  display: flex;
+  align-items: center;
+  width: calc(100% - 4rem);
+  border-radius: var(--br5);
+  padding: 3rem;
+  margin: 2rem 0 0;
+  flex-direction: column;
+}
+
+.topHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+/* ✅ تعديل الصورة */
+.avatarWrapper {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  border: 1px solid var(--primaryColor);
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: var(--backgroundColor);
+  transition: 0.3s;
+}
+
+.userName {
+  font-size: var(--fs-h4);
+  font-weight: 600;
+  margin: 0 2rem 0 0;
+}
+
+.editButton {
+  background-color: var(--primaryColor);
+  border-radius: var(--br5);
+  color: var(--backgroundColor);
+  font-size: var(--fs-body);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  font-family: var(--ar);
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.switchButton {
+  padding: 0.5rem 1rem;
+  font-size: var(--fs-body);
+  background-color: var(--backgroundColor);
+  color: var(--primaryColor);
+  border: 1px solid var(--primaryColor);
+  border-radius: var(--br5);
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: var(--ar);
+  font-weight: 600;
+}
+
+.switchButton:hover {
+  border: 1px solid var(--textColor);
+}
+
+.activeButton {
+  background-color: var(--primaryColor);
+  color: var(--backgroundColor);
+  border: 1px solid var(--primaryColor);
+}
+
+.content {
+  background-color: var(--backgroundColor);
+  border-radius: var(--br5);
+  padding: 3rem;
+  width: calc(100% - 4rem);
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* ✅ أزرار الخروج والحذف */
+.editToggleRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.logoutBtn,
+.deleteBtn {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--primaryColor);
+  border-radius: var(--br5);
+  font-size: var(--fs-body);
+  cursor: pointer;
+  background-color: var(--primaryColor);
+  color: var(--backgroundColor);
+  font-weight: 500;
+  font-family: var(--ar);
+}
+
+.logoutBtn:hover,
+.deleteBtn:hover {
+  border: 1px solid var(--textColor);
+}
+
+/* ✅ Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fullImage {
+  max-width: 90%;
+  height: auto;
+  border-radius: var(--br5);
+  box-shadow: 0 0 20px black;
+}
+
+/* ✅ تأكيد الخروج والحذف */
+.confirmOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.confirmModal {
+  background-color: var(--backgroundColor);
+  border-radius: var(--br5);
+  padding: 2rem;
+  max-width: 300px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  font-family: var(--ar);
+}
+
+.confirmActions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.confirmDelete {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: var(--br5);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  font-family: var(--ar);
+  cursor: pointer;
+}
+
+.cancelDelete {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: var(--br5);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  font-family: var(--ar);
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+
+  .header,
+  .content {
+    width: 600px;
+    padding: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+
+  .header,
+  .content {
+    width: 800px;
+  }
+}
+
+@media (min-width: 1280px) {
+
+  .header,
+  .content {
+    width: 1000px;
+  }
+}

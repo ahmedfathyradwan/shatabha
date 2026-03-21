@@ -90,7 +90,7 @@
   color: var(--backgroundColor);
   padding: 0rem 1rem;
   border-radius: var(--br5);
-  font-size: var(--fs-h4);
+  font-size: var(--fs-small);
   font-family: var(--ar);
   outline: none;
   border: 1px solid var(--primaryColor);

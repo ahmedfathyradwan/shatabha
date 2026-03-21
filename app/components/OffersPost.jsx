@@ -72,7 +72,7 @@ export default function OffersPost() {
         className={styles.moreButton}
         onClick={() => router.push("/offersPost")}
       >
-        عرض المزيد
+        عرض جميع العروض
       </button>
     </div>
   );

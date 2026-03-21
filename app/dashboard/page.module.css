@@ -29,11 +29,6 @@
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
-.statCard:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
 .statLabel {
   font-size: 0.85rem;
   color: #64748b;

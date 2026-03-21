@@ -3,8 +3,9 @@
 import { useState, useRef } from 'react';
 import styles from './provider.module.css';
 import MyRequests from './OrdersTab';
-import MyOffers from './MyPost';
+// import MyOffers from './MyPost';
 import ConfirmModal from '../../../components/ConfirmModal';
+import MyPortfolio from './ProfileTab';
 
 export default function ProviderDashboard() {
   const [activeTab, setActiveTab] = useState('requests');
@@ -15,6 +16,16 @@ export default function ProviderDashboard() {
   const fileInputRef = useRef(null);
 
   const name = 'أحمد فؤاد';
+
+  // البيانات المستخدمة في المكونات
+  const userData = {
+    id: 1,
+    name: 'أحمد فؤاد',
+    role: 'متخصص تشطيب',
+    address: 'القاهرة',
+    phone: '01012345678',
+    isPaidUser: true,
+  };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -97,21 +108,30 @@ export default function ProviderDashboard() {
             }`}
             onClick={() => setActiveTab('requests')}
           >
-            طلباتي
+            طلبات التشطيب
           </button>
-          <button
+          {/* <button
             className={`${styles.switchButton} ${
               activeTab === 'offers' ? styles.activeButton : ''
             }`}
             onClick={() => setActiveTab('offers')}
           >
             العروض المقدمة
+          </button> */}
+                    <button
+            className={`${styles.switchButton} ${
+              activeTab === 'portfolio' ? styles.activeButton : ''
+            }`}
+            onClick={() => setActiveTab('portfolio')}
+          >
+            معرض أعمالي
           </button>
         </div>
 
         <div className={styles.content}>
           {activeTab === 'requests' && <MyRequests />}
-          {activeTab === 'offers' && <MyOffers />}
+          {/* {activeTab === 'offers' && <MyOffers data={userData} />} */}
+          {activeTab === 'portfolio' && <MyPortfolio data={userData} />}
         </div>
       </div>
 

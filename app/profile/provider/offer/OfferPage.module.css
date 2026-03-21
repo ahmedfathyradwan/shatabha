@@ -1,114 +1,147 @@
 .container {
-  max-width: 700px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: calc(100%-4rem);
+  margin: 2rem;
+  padding: 2rem;
+  background: var(--backgroundColor);
+  border-radius: var(--br5);
   direction: rtl;
   text-align: center;
 }
 
 .title {
-  margin-bottom: 20px;
-  font-size: 22px;
-  font-weight: 700;
+  margin: 5rem 0 2rem;
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  color: var(--textColor);
 }
 
 .requestCard {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   gap: 20px;
-  background: #f8f8f8;
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 24px;
+  background: var(--whiteColor);
+  border-radius: var(--br5);
+  padding: 2rem 3rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--primaryColor);
 }
 
 .requestInfo {
   flex: 1;
   text-align: right;
-  font-size: 14px;
+  font-size: var(--fs-body);
 }
 
-.desc {
+.orderDetails strong {
   margin: 10px 0;
-  color: #555;
+  color: var(--primaryColor);
+  font-weight: 500;
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+
+.orderDetails {
+  margin: 10px 0;
+  color: var(--textColor);
+  font-weight: 500;
+  font-size: var(--fs-body);
   line-height: 1.6;
 }
 
 .image {
-  width: 120px;
-  height: 120px;
-  border-radius: 8px;
+  width: 200px;
+  height: 200px;
+  border-radius: var(--br5);
   object-fit: cover;
 }
 
 .form {
   display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--whiteColor);
+  padding: 2rem 3rem;
+  border-radius: var(--br5);
+  /* border: 1px solid var(--primaryColor); */
+}
+
+.formGroup {
+  display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 0.5rem;
+  align-items: flex-start;
+  width:100%;
+}
+
+.label {
+  font-size: 14px;
+  color: var(--textColor);
 }
 
 .input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 15px;
+  padding: 1rem 2rem;
+  border: 1px solid var(--secondaryColor);
+  border-radius: var(--br5);
+  font-size: var(--fs-body);
+  font-family: var(--ar);
+  width: 100%;
+    color: var(--textColor);
 }
 
 .warning {
-  font-size: 13px;
-  color: #a00;
+  font-size: var(--fs-body);
+  color: var(--errorColor);
   margin-top: 10px;
   background: #fff3f3;
-  border-radius: 8px;
+  border-radius: var(--br5);
   padding: 10px;
 }
 
 .submitButton {
-  background: #c7a26e;
-  color: white;
+  background: var(--primaryColor);
+  color: var(--whiteColor);
   border: none;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
+  padding: 1rem 2rem;
+  border-radius: var(--br5);
+  font-size: var(--fs-h4);
+  font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
-}
-
-.submitButton:hover {
-  opacity: 0.9;
+font-family: var(--ar);
+width: 100%;
 }
 
 .successBox {
   background: #f0fff4;
   border: 1px solid #8bc34a;
   color: #2e7d32;
-  border-radius: 12px;
+  border-radius: var(--br5);
   padding: 20px;
-  margin-top: 20px;
+  margin-top: 10px;
   font-weight: 500;
   line-height: 1.8;
+    font-size: var(--fs-h4);
+
 }
 .backButton {
-  background: #0070f3;
-  color: white;
+  background: var(--primaryColor);
+  color: var(--whiteColor);
   border: none;
   padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 600;
+  border-radius: var(--br5);
+  font-size: var(--fs-h4);
+  font-family: var(--ar);
+  font-weight: 500;
   cursor: pointer;
   margin-top: 20px;
   transition: 0.3s;
 }
 
-.backButton:hover {
-  opacity: 0.85;
-}
 .warningBox {
   display: flex;
   align-items: flex-start;
@@ -118,7 +151,7 @@
 }
 
 .warningBox input[type="checkbox"] {
-  margin-top: 0.3rem;
+  margin-top: 3rem;
   cursor: pointer;
 }
 

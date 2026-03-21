@@ -26,7 +26,7 @@ export default function OnlinePage() {
     <section className={styles.section}>
       <h1 className={styles.title}>خدمات تشطيب الأونلاين</h1>
       <p className={styles.intro}>
-        تصفح أفضل الخدمات الأونلاين اللي تقدر تستخدمها في مصر — من أول التصميم لحد التنفيذ.
+       أشهر الخدمات الرقمية المتعلقة بالتشطيب
       </p>
 
       <div className={styles.filterContainer}>

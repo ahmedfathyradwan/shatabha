@@ -3,9 +3,9 @@ import AboutUs from '../components/AboutUs';
 import ContactUs from '../components/ContactUs';
 import Image from "next/image";
 import MonthlyOffers from '../components/OffersPost';
-import DonationSection from '../components/DonationSection';
 import FinishOrMaintenanceCard from '../components/FinishOrMaintenanceCard';
 import OnlineSection from '../components/OnlineSection';
+import Link from 'next/link';
 
 export default async function HomePage() {
   return (
@@ -29,21 +29,24 @@ export default async function HomePage() {
             <h4 className={styles.h4}>
               هنا جمعنا خبرة المهندسين ومجهود سنين من البحث والتصميم في مجال التشطيب والديكور،
               <br />
-              عشان نسهّلك طريقك — وتبدأ مشروعك وانت مطمّن، بخطوات واضحة،
+              عشان نسهّلك طريقك — وتبدأ رحلة تشطيبك وانت مطمّن، بخطوات واضحة،
               <br />
               وأشخاص موثوقين من مهندسين، ومقاولين، وفنيين من كل التخصصات،
               <br />
               في مكان واحد… اتبنى بحب واحترام لوقتك وفلوسك.
             </h4>
-            <a href="#chooseService" className={styles.ctaButton}>
-              ابدء الآن
-            </a>
+            <Link href="/finishChoice/freelance/finishingRequest" className={styles.ctaButton}>
+              نشر طلب تشطيب
+            </Link>
+
+            <Link href="/maintenance/maintenanceRequest" className={`${styles.ctaButton} ${styles.ctaButton2}`}>
+              نشر طلب صيانة
+            </Link>
           </div>
         </div>
       </div>
 
       <section id="services" className={styles.servicesSection}>
-        {/* <h2 className={styles.sectionTitle}>خدماتنا</h2> */}
         <div className={styles.monthlyOffers}>
           <MonthlyOffers />
         </div>
@@ -53,11 +56,8 @@ export default async function HomePage() {
         <div className={styles.onlineSection}>
           <OnlineSection />
         </div>
-        <div className={styles.donationSection}>
-          <DonationSection />
-        </div>
       </section>
-      
+
       <div className={styles.aboutUs} id="about-us">
         <AboutUs />
       </div>

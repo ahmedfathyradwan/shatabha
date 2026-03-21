@@ -1,7 +1,8 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Navbar from "./Navbar";
+import NavbarMobile from "./NavbarMobile";
+import NavbarDesktop from "./NavbarDesktop";
 
 const AppWrapper = ({ children }) => {
   const pathname = usePathname();
@@ -11,9 +12,14 @@ const AppWrapper = ({ children }) => {
     <div className="mainContainer">
       {children}
       {!isAuthPage && (
-        <div className="mobNav">
-          <Navbar />
-        </div>
+        <>
+          <div className="mobNav">
+            <NavbarMobile />
+          </div>
+          <div className="desktopNav">
+            <NavbarDesktop />
+          </div>
+        </>
       )}
     </div>
   );

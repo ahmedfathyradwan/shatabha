@@ -100,10 +100,6 @@ export default function MaintenanceTechniciansPage() {
           <p className={styles.noResults}>لا يوجد فنيين صيانة بهذا التخصص حالياً</p>
         )}
       </main>
-
-      <footer className={styles.footer}>
-        عرض تجريبي — الصور افتراضية (logo.png)
-      </footer>
     </div>
   );
 }

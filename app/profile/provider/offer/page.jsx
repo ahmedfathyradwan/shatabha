@@ -32,23 +32,26 @@ export default function OfferPage() {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>تقديم عرض</h2>
-
       {/* 🔹 تفاصيل الطلب */}
       <div className={styles.requestCard}>
         <div className={styles.requestInfo}>
-          <p>
-            <strong>الخدمة المطلوبة:</strong> {request.serviceType}
+          <p className={styles.orderDetails}>
+            <strong>نوع الخدمة المطلوبة:</strong> {request.serviceType}
           </p>
-          <p>
-            <strong>المنطقة:</strong> {request.address}
+          <p className={styles.orderDetails}>
+            <strong>مقدم الخدمة المطلوب:</strong> {request.providerType}
           </p>
-          <p>
-            <strong>تاريخ النشر:</strong> {request.date}
+          <p className={styles.orderDetails}>
+            <strong>المساحة:</strong> {request.area} م²
           </p>
-          <p className={styles.desc}>{request.description}</p>
-          <p>
-            <strong>اسم العميل:</strong> {request.providerType} | {request.area} م²
+          <p className={styles.orderDetails}>
+            <strong>العنوان:</strong> {request.address}
+          </p>
+          <p className={styles.orderDetails}>
+            <strong>وصف الخدمة:</strong> {request.description}
+          </p>
+          <p className={styles.orderDetails}>
+            <strong>تاريخ نشر الخدمة:</strong> {request.date}
           </p>
         </div>
         <img
@@ -56,12 +59,14 @@ export default function OfferPage() {
           alt={request.serviceType}
           className={styles.image}
         />
+
       </div>
+      <h2 className={styles.title}>تقديم عرض</h2>
 
       {/* 🔹 بعد التقديم */}
       {submitted ? (
         <div className={styles.successBox}>
-          <p>✅ تم تقديم عرضك بنجاح</p>
+          <p>تم تقديم عرضك بنجاح</p>
           <p>في انتظار قبول العميل لعرضك بالتوفيق!</p>
 
           <button
@@ -72,33 +77,52 @@ export default function OfferPage() {
           </button>
         </div>
       ) : (
+
         <form className={styles.form} onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="السعر تقريبا"
-            className={styles.input}
-            required
-          />
-          <input
-            type="text"
-            placeholder="مدة التنفيذ المتوقعة"
-            className={styles.input}
-            required
-          />
-          <input
-            type="date"
-            placeholder="تاريخ البدء في التنفيذ"
-            className={styles.input}
-            required
-          />
-          <input
-  type="tel"
-  placeholder="رقم الهاتف"
-  className={styles.input}
-  required
-  pattern="^(010|011|012|015)[0-9]{8}$"
-  title="الرجاء إدخال رقم هاتف مصري صحيح مكون من 11 رقمًا (يبدأ بـ 010 أو 011 أو 012 أو 015)"
-/>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>السعر التقريبي</label>
+            <input
+              type="number"
+              placeholder="مثال: 5000"
+              maxLength={20}
+              className={styles.input}
+              required
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label className={styles.label}>مدة التنفيذ المتوقعة</label>
+            <input
+              type="text"
+              placeholder="مثال: 10 أيام"
+              className={styles.input}
+              required
+              maxLength={50}
+
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label className={styles.label}>تاريخ بدء التنفيذ</label>
+            <input
+              type="date"
+              className={styles.input}
+              required
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label className={styles.label}>رقم الهاتف</label>
+            <input
+              type="number"
+              placeholder="01XXXXXXXXX"
+              className={styles.input}
+              required
+              maxLength={11}
+              pattern="^(010|011|012|015)[0-9]{8}$"
+              title="الرجاء إدخال رقم هاتف مصري صحيح مكون من 11 رقمًا (يبدأ بـ 010 أو 011 أو 012 أو 015)"
+            />
+          </div>
 
           {/* ✅ التشيك بوكس */}
           <div className={styles.warningBox}>

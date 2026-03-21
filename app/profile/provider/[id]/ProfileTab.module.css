@@ -5,42 +5,14 @@
   padding: 2rem;
   background: var(--backgroundColor);
   border-radius: var(--br5);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   max-width: 600px;
   margin: 0 auto;
-}
-
-.profileTitle {
-  font-size: var(--fs-body);
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: var(--textColor);
-  text-align: center;
-}
-
-.profileField {
-  font-size: var(--fs16);
-  font-family: var(--ar);
-  color: var(--textColor);
-  line-height: 1.6;
-}
-
-.profileField strong {
-  color: var(--primaryColor);
-}
-
-/* =============================== */
-/* 🔹 قسم بعض أعمالي السابقة */
-/* =============================== */
-
-.worksSection {
-  margin-top: 2rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  padding-top: 1.5rem;
+  width: 100%;
+  height: 100%;
 }
 
 .worksTitle {
-  font-size: var(--fs-body);
+  font-size: var(--fs-h2);
   font-weight: 600;
   margin-bottom: 1rem;
   color: var(--textColor);
@@ -68,15 +40,13 @@
   transition: 0.3s;
 }
 
-.singleButton:hover {
-  background-color: var(--primaryColorHover, #2da54e);
-}
-
 /* 🔸 عرض الصور */
 .imagesGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .imagePreview {
@@ -88,14 +58,10 @@
   transition: transform 0.3s ease;
 }
 
-.imagePreview:hover {
-  transform: scale(1.05);
-}
-
 /* 🔸 رسالة في حال لا توجد صور */
 .noImages {
-  color: #888;
-  font-size: var(--fs14);
+  color: var(--textColor);
+  font-size: var(--fs-small);
   text-align: center;
 }
 .imageWrapper {
@@ -115,11 +81,12 @@
   position: absolute;
   top: 2px;
   right: 2px;
-  background: rgba(0,0,0,0.5);
-  color: white;
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--errorColorLight);
   border: none;
   border-radius: 50%;
   width: 20px;
   height: 20px;
+  font-weight: 600;
   cursor: pointer;
 }

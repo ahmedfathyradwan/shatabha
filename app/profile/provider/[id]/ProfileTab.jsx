@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function ProfileTab({ data }) {
   const [images, setImages] = useState([]);
-  const maxImages = 5; // الحد المبدئي للصور
+  const maxImages = 5;
 
   const handleImagesChange = (e) => {
     const files = Array.from(e.target.files);
@@ -29,20 +29,7 @@ export default function ProfileTab({ data }) {
 
   return (
     <div className={styles.profileContainer}>
-      <h2 className={styles.profileTitle}>الملف الشخصي</h2>
-
-      <p className={styles.profileField}>{data.name}</p>
-      <p className={styles.profileField}>{data.role}</p>
-      <p className={styles.profileField}>
-        <strong>العنوان:</strong> {data.address}
-      </p>
-      <p className={styles.profileField}>
-        <strong>رقم الهاتف:</strong> {data.phone}
-      </p>
-
-      {/* 🖼️ قسم الأعمال السابقة */}
-      <div className={styles.worksSection}>
-        <h3 className={styles.worksTitle}>بعض أعمالي السابقة</h3>
+        <h3 className={styles.worksTitle}>معرض أعمالي</h3>
 
         <label className={styles.singleButton}>
           إضافة أو حذف صور
@@ -57,6 +44,8 @@ export default function ProfileTab({ data }) {
 
         <p style={{ fontSize: "0.9rem", color: "gray", marginTop: "0.5rem" }}>
           الحد الأقصى للصور: {maxImages}. يمكنك رفع المزيد مقابل الاشتراك المدفوع.
+          <br />
+          للإشتراك المدفوع، يرجى التواصل معنا من خلال صفحة "تواصل معنا".
         </p>
 
         <div className={styles.imagesGrid}>
@@ -80,7 +69,6 @@ export default function ProfileTab({ data }) {
             <p className={styles.noImages}>لا توجد صور حالياً</p>
           )}
         </div>
-      </div>
     </div>
   );
 }

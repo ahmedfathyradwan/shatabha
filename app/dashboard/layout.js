@@ -18,14 +18,14 @@ import styles from "./layout.module.css";
 import Image from "next/image";
 
 const navItems = [
-  { label: "المستخدمون", href: "/admin-dashboard/users", icon: Users },
-  { label: "أسعار باقات التشطيب", href: "/admin-dashboard/pricing", icon: DollarSign },
-  { label: "الطلبات", href: "/admin-dashboard/orders", icon: ShoppingBag },
-  { label: "العروض", href: "/admin-dashboard/offers", icon: FileText },
-  { label: "إعلانات", href: "/admin-dashboard/ads", icon: BookImage },
-  { label: "الخدمات", href: "/admin-dashboard/services", icon: PanelsTopLeft },
-  { label: "التبرع", href: "/admin-dashboard/donations", icon: HandCoins },
-  { label: "تسجيل الخروج", href: "/admin-dashboard/logout", icon: LogOut, danger: true },
+  { label: "المستخدمون", href: "/dashboard/users", icon: Users },
+  { label: "أسعار باقات التشطيب", href: "/dashboard/pricing", icon: DollarSign },
+  { label: "الطلبات", href: "/dashboard/orders", icon: ShoppingBag },
+  { label: "العروض", href: "/dashboard/offers", icon: FileText },
+  { label: "إعلانات", href: "/dashboard/ads", icon: BookImage },
+  { label: "الخدمات", href: "/dashboard/services", icon: PanelsTopLeft },
+  { label: "التبرع", href: "/dashboard/donations", icon: HandCoins },
+  { label: "تسجيل الخروج", href: "/dashboard/logout", icon: LogOut, danger: true },
 ];
 
 export default function AdminLayout({ children }) {

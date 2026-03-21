@@ -7,9 +7,9 @@ import HomeIcon from "./icons/HomeIcon";
 import UserIcon from "./icons/UserIcon";
 import MenuIcon from "./icons/MenuIcon";
 import SideMenu from "./SideMenu";
-import styles from "../styles/navbar.module.css";
+import styles from "../styles/navbarMobile.module.css";
 
-export default function Navbar() {
+export default function NavbarMobile() {
   const pathname = usePathname();
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);

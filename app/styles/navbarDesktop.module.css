@@ -1,0 +1,83 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  z-index: 15;
+  padding: 1.5rem 0.5rem;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: var(--whiteColor);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* اللوجو */
+.logoIcon {
+  cursor: pointer;
+}
+
+/* اللينكات */
+.links {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  background: var(--whiteColor);
+  border-radius: var(--br5);
+}
+
+.link {
+  color: var(--textColor);
+  font-size: var(--fs-link);
+  text-decoration: none;
+  padding: 7px 14px;
+  border-radius: var(--br5);
+  transition: background-color 0.3s ease
+}
+
+.link:hover {
+  background-color: var(--secondaryColor);
+}
+
+/* زرار تسجيل */
+.auth {
+display: flex;
+}
+
+.loginBtn {
+  background-color: var(--primaryColor);
+  border: 1px solid var(--secondaryColor);
+  color: var(--whiteColor);
+  padding: 8px 20px;
+  font-weight: 500;
+  border-radius: var(--br5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+    font-size: var(--fs-h5);
+
+}
+
+.loginBtn:hover {
+  background-color: var(--secondaryColor);
+  border-color: var(--secondaryColor);
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    height: 80px;
+    padding: 0 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar {
+    height: 90px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .navbar {
+    max-width: 1200px;
+    margin: auto;
+  }
+}

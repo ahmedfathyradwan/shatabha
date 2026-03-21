@@ -29,7 +29,7 @@ export default function OnlineSection() {
     <section className={styles.section}>
       <h2 className={styles.title}>خدمات تشطيب أونلاين</h2>
       <p className={styles.intro}>
-        خدمات رقمية تساعدك في تنفيذ أو متابعة التشطيب بسهولة من أي مكان.
+       أشهر الخدمات الرقمية المتعلقة بالتشطيب
       </p>
 
       <div className={styles.filterContainer}>
@@ -90,7 +90,7 @@ export default function OnlineSection() {
 
       <div className={styles.buttonContainer}>
         <Link href="/online" className={styles.showAllBtn}>
-          عرض كل الخدمات
+          عرض جميع الخدمات
         </Link>
       </div>
     </section>

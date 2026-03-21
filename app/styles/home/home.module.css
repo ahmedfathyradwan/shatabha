@@ -92,11 +92,16 @@
   border-radius: var(--br5);
   font-size: var(--fs-h4);
   font-family: var(--ar);
-  font-weight: 500;
   outline: none;
   border: 1px solid var(--primaryColor);
   cursor: pointer;
   text-decoration: none;
+}
+
+.ctaButton2 {
+  background-color: var(--textColor);
+    border: 1px solid var(--textColor);
+margin-right: 0.5rem;
 }
 
 .servicesSection {

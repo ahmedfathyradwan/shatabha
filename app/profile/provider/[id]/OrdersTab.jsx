@@ -2,6 +2,8 @@
 import styles from "./OrdersTab.module.css";
 import requests from "../../../mockData/requests";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+
 
 export default function OrdersTab() {
   const router = useRouter();
@@ -10,16 +12,12 @@ export default function OrdersTab() {
     <div className={styles.ordersContainer}>
       {requests.map((req) => (
         <div key={req.id} className={styles.orderCard}>
-          <img
-            src={req.image}
-            alt={req.serviceType}
-            className={styles.orderImage}
-          />
-
           <div className={styles.orderInfo}>
-            <h3 className={styles.orderTitle}>{req.serviceType}</h3>
             <p className={styles.orderDetails}>
-              <strong>النوع:</strong> {req.providerType}
+              <strong>نوع الخدمة المطلوبة:</strong> {req.serviceType}
+            </p>
+            <p className={styles.orderDetails}>
+              <strong>مقدم الخدمة المطلوب:</strong> {req.providerType}
             </p>
             <p className={styles.orderDetails}>
               <strong>المساحة:</strong> {req.area} م²
@@ -27,9 +25,11 @@ export default function OrdersTab() {
             <p className={styles.orderDetails}>
               <strong>العنوان:</strong> {req.address}
             </p>
-            <p className={styles.orderDescription}>{req.description}</p>
-            <p className={styles.orderDate}>
-              <strong>التاريخ:</strong> {req.date}
+            <p className={styles.orderDetails}>
+              <strong>وصف الخدمة:</strong> {req.description}
+            </p>
+            <p className={styles.orderDetails}>
+              <strong>تاريخ نشر الخدمة:</strong> {req.date}
             </p>
 
             {/* 🔹 زر تقديم عرض */}
@@ -40,6 +40,14 @@ export default function OrdersTab() {
               تقديم عرض
             </button>
           </div>
+
+                    <Image
+            src={req.image}
+            alt={req.serviceType}
+            width={100}
+            height={100}
+            className={styles.orderImage}
+          />
         </div>
       ))}
     </div>

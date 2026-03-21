@@ -10,7 +10,7 @@ export default function FinishOrMaintenanceCard() {
   const cards = [
     {
       title: 'قسم التشطيب',
-      image: '/images/finishing.jpg',
+      image: '/images/fin.jpg',
       link: '/finishChoice',
     },
     {

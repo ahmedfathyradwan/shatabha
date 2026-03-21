@@ -74,10 +74,3 @@ display: flex;
     height: 90px;
   }
 }
-
-@media (min-width: 1280px) {
-  .navbar {
-    max-width: 1200px;
-    margin: auto;
-  }
-}

@@ -10,6 +10,7 @@ export default function FinishingTypePage() {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>أشهر أنواع التشطيب الداخلي</h1>
+      <h3 className={styles.disc}>دول أشهر 8 أنواع تشطيب داخلي اختار أكتر نوع مرتاح ليه.</h3>
 
       {finishingTypes.map((type) => (
         <div key={type.id} className={styles.typeCard}>
@@ -32,16 +33,16 @@ export default function FinishingTypePage() {
             />
           </div>
 
+                    {/* مناسب لمين */}
+          <p className={styles.suitableFor}>{type.suitableFor}</p>
+
           {/* المميزات */}
-          <h3 className={styles.featuresTitle}>المميزات:</h3>
+          <h3 className={styles.featuresTitle}>مميزات النوع ده إنه:</h3>
           <ul className={styles.featuresList}>
             {type.features.map((feature, index) => (
               <li key={index}>{feature}</li>
             ))}
           </ul>
-
-          {/* مناسب لمين */}
-          <p className={styles.suitableFor}>{type.suitableFor}</p>
 
           {/* اللينك */}
           {type.moreImagesLink && (
@@ -51,7 +52,7 @@ export default function FinishingTypePage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              للمزيد من الصور حول هذا النوع
+              لو عايز صور أكتر عن نوع التشطيب ده اضغط هنا
             </a>
           )}
         </div>

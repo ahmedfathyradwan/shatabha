@@ -117,7 +117,7 @@ const MaintenanceRequestPage = () => {
           <label className={styles.label}>الموافقة على الشروط</label>
         </div>
 
-        <Link href="/freelance/terms" className={styles.termsLink}>
+        <Link href="/finishChoice/freelance/terms" className={styles.termsLink}>
           اقرأ الشروط والأحكام
         </Link>
 

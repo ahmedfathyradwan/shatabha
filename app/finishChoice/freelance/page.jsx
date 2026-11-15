@@ -1,3 +1,4 @@
+
 "use client";
 import React from 'react';
 import styles from '../../styles/freelance/freelance.module.css';
@@ -59,16 +60,24 @@ const Freelance = () => {
     <>
       <div className={styles.container}>
         <h2 className={styles.title}>التشطيب الحر</h2>
+
         <div className={styles.cardsGrid}>
           {cards.map((card, index) => (
-            <div key={index} className={styles.card}>
-              <img src={card.image} alt={card.title} className={styles.cardImage} />
-              <div
-                className={styles.cardFooter}
-                onClick={() => router.push(card.link)}
-                style={{ cursor: 'pointer' }}
-              >
+            <div
+              key={index}
+              className={styles.card}
+              onClick={() => router.push(card.link)}
+              style={{ cursor: 'pointer' }}
+            >
+              <img
+                src={card.image}
+                alt={card.title}
+                className={styles.cardImage}
+              />
+
+              <div className={styles.cardFooter}>
                 <h3>{card.title}</h3>
+
                 <button
                   className={styles.arrowButton}
                   onClick={(e) => {

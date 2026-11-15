@@ -85,7 +85,7 @@ const guideData = [
   },
   {
     "id": 13,
-    "title": "13- الجبسوم بورد",
+    "title": "13- الجبسوم بورد وديكورات الحوائط",
     "slug": "gypsum-board",
     "image": "/images/finishingSteps/15.jpeg",
     "link": "/internal/gypsum-board"

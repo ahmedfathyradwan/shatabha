@@ -14,7 +14,7 @@ export default function WallDecorPage() {
       <div className={styles.decorList}>
         {wallDecorData.map((item) => (
           <div key={item.id} className={styles.decorItem}>
-            <h2 className={styles.decorTitle}>{item.title}</h2>
+            <h2 className={styles.decorTitle}>{item.id}. {item.title}</h2>
             <p className={styles.decorDesc}>{item.description}</p>
 
             {/* وقت التنفيذ المناسب */}

@@ -1,60 +1,60 @@
 const facades = [
-  {
+    {
     id: 1,
-    title: "مختلطة (Mixed Materials Facade)",
+    title: "واجهة محارة + دهان",
     features: [
-      "مزج خامات لإبراز عناصر الواجهة (حجر + زجاج + خشب مثلاً)",
+      "محارة أسمنتية مغطاة بدهان",
+      "خيار شائع للستايل الكلاسيكي والحديث البسيط"
+    ],
+    slug: "render",
+    image: "/images/facades/render.jpg",
+    responsible: [
+      "المهندس المعماري",
+            "مقاول الواجهات",
+      "فني المحارة",
+      "نقاش",
+    ],
+    links: [
+      { name: "للمزيد من", url: "https://www.pinterest.com/ideas/external-render/953622724271/" }
+    ],
+    cta: "https://www.pinterest.com/ideas/external-render/953622724271/"
+  },
+
+  {
+    id: 2,
+    title: "الواجهة المختلطة",
+    features: [
+      "مزيج خامات (حجر + زجاج + خشب + معدن)",
       "مرونة تصميمية عالية لإظهار تفاصيل معمارية مميزة",
-      "مناسبة لإنشاء هوية بصرية للمبنى وتجزئة الألوان والملمس"
     ],
     slug: "mixed",
     image: "/images/facades/mixed.jpg",
     responsible: [
       "المهندس المعماري",
       "مقاول الواجهات",
-      "فني تركيب الحجر أو الخشب أو المعدن"
+      "فني تركيب حجر",
+      "فني تركيب معدن",
+      "فني تركيب زجاج",
+      "فني تركيب خشب",
     ],
     links: [
-      { name: "المزيد من الأمثلة", url: "https://www.pinterest.com/ideas/cladding-and-render-facade/919351717672/" }
+      { name: "المزيد من الصور", url: "https://www.pinterest.com/ideas/cladding-and-render-facade/919351717672/" }
     ],
     cta: "https://www.pinterest.com/ideas/cladding-and-render-facade/919351717672/"
   },
 
   {
-    id: 2,
-    title: "محارة (Render / Stucco Finish)",
-    features: [
-      "محارة أسمنتية أو رندر ملون جاهز مع طبقة نهائية",
-      "تكلفة معتدلة وسهولة الإصلاح وإعادة الطلاء",
-      "خيار شائع للستايل الكلاسيكي والحديث البسيط"
-    ],
-    slug: "render",
-    image: "/images/facades/render.jpg",
-    responsible: [
-      "عامل المحارة (البنا)",
-      "دهّان",
-      "المهندس المعماري"
-    ],
-    links: [
-      { name: "أفكار واجهات المحارة", url: "https://www.pinterest.com/ideas/external-render/953622724271/" }
-    ],
-    cta: "https://www.pinterest.com/ideas/external-render/953622724271/"
-  },
-
-  {
     id: 3,
-    title: "حجر طبيعي / فرعوني / هاشمي (Natural Stone Facade)",
+    title: "الواجهة الحجرية (حجر طبيعي / حجر فرعوني / حجر هاشمي )",
     features: [
       "مظهر طبيعي وراقي، متوفر بأنواع وألوان متعددة",
-      "متين ومناسب للواجهات الخارجية لكن يحتاج تركيب محترف",
-      "يشمل الفرعوني والهاشمي كأنماط محلية مميزة"
     ],
     slug: "stone",
     image: "/images/facades/stone.jpg",
     responsible: [
-      "فني تركيب الحجر",
+      "مهندس إنشائي",
       "مقاول الواجهات",
-      "مهندس إنشائي"
+      "فني تركيب الحجر",
     ],
     links: [
       { name: "الحجر الطبيعي", url: "https://www.pinterest.com/ideas/facade-stone-cladding/946609294885/" },
@@ -66,18 +66,17 @@ const facades = [
 
   {
     id: 4,
-    title: "زجاجية (Glass Facade)",
+    title: "الواجهة الزجاجية",
     features: [
       "مظهر حديث وشكل مفتوح مع إطلالات كبيرة",
-      "يجب استخدام زجاج عازل (Double glazing / Low-E) للتحكم في الحرارة",
-      "يتطلب صيانة دورية (تنظيف) واعتبارات خصوصية وأمان"
+      "ملاحظة: تتطلب نظافة دورية واعتبارات خصوصية وأمان"
     ],
     slug: "glass",
     image: "/images/facades/glass.jpg",
     responsible: [
+      "المهندس المعماري",
+            "مقاول الواجهات",
       "فني تركيب الزجاج",
-      "مهندس واجهات",
-      "المهندس المعماري"
     ],
     links: [
       { name: "تصاميم واجهات زجاجية", url: "https://www.pinterest.com/tloranger3529/glass-facades/" }
@@ -87,18 +86,16 @@ const facades = [
 
   {
     id: 5,
-    title: "خشب / WPC (Wood Facade)",
+    title: "الواجهة الخشبية",
     features: [
-      "مظهر دافئ وطبيعي، مع خيارات خشب طبيعي أو خشب-بلاستيك مركب (WPC)",
-      "مقاوم للتعفن والحشرات في حالة WPC وسهل التركيب كألواح",
       "مناسب للأجزاء الزخرفية أو تغطية أجزاء من الواجهة ضمن تصميم مختلط"
     ],
     slug: "wood",
     image: "/images/facades/wood.jpg",
     responsible: [
-      "نجّار / فني WPC",
+      "المهندس المعماري",
       "مقاول الواجهات",
-      "المهندس المعماري"
+      "فني WPC",
     ],
     links: [
       { name: "أمثلة واجهات خشب وWPC", url: "https://www.pinterest.com/fugelan/wpc-wood-plastic-composite/" }
@@ -108,18 +105,17 @@ const facades = [
 
   {
     id: 6,
-    title: "سيراميك (Ceramic Cladding)",
+    title: "الواجهة السيراميك",
     features: [
-      "ألواح سيراميكية مقاومة للبقع وسهلة التنظيف",
+      "ألواح سيراميك مقاومة للبقع وسهلة التنظيف",
       "خيارات ألوان ونقوش متعددة وتكلفة تنافسية",
-      "تحتاج تركيب دقيق وتسريب مفاصل جيد لمنع تسرب المياه"
     ],
     slug: "ceramic",
     image: "/images/facades/ceramic.jpg",
     responsible: [
-      "فني تركيب السيراميك",
       "المهندس المعماري",
-      "مقاول الواجهات"
+      "مقاول الواجهات",
+      "فني تركيب السيراميك",
     ],
     links: [
       { name: "أمثلة واجهات سيراميكية", url: "https://www.pinterest.com/ghaxhimustafa/ceramic-facade/" }
@@ -129,7 +125,7 @@ const facades = [
 
   {
     id: 7,
-    title: "سمنت بورد (Cement Board Cladding)",
+    title: "واجهة سمنت بورد",
     features: [
       "ألواح ألياف-أسمنت متينة ومقاومة للرطوبة",
       "خفيفة نسبياً وسهلة التركيب وتقبل الدهانات المختلفة",
@@ -138,9 +134,9 @@ const facades = [
     slug: "cementboard",
     image: "/images/facades/cementboard.jpg",
     responsible: [
+      "المهندس المعماري",
+      "مقاول الواجهات",
       "فني تركيب سمنت بورد",
-      "مورد الألواح الأسمنتية",
-      "المهندس المعماري"
     ],
     links: [
       { name: "أفكار واجهات سمنت بورد", url: "https://www.pinterest.com/russellcrosby69/fiber-cement-panel-facade/" }
@@ -150,18 +146,17 @@ const facades = [
 
   {
     id: 8,
-    title: "رخام (Marble Facade)",
+    title: "الواجهة الرخام",
     features: [
       "مظهر فاخر ولامع شائع في الواجهات الراقية",
-      "يحتاج تثبيت دقيق وقد يتطلب صيانة (جلي وتلميع)",
-      "سعره أعلى ومناسب للمباني الفاخرة أو المداخل الرئيسية"
+      "مناسب للمباني الفاخرة أو المداخل الرئيسية"
     ],
     slug: "marble",
     image: "/images/facades/marble.jpg",
     responsible: [
-      "فني تركيب الرخام",
+      "المهندس المعماري",
       "مقاول الواجهات",
-      "المهندس المعماري"
+      "فني تركيب الرخام",
     ],
     links: [
       { name: "أفكار واجهات رخام", url: "https://www.pinterest.com/cathyli4054/marble-facade/" }

@@ -48,14 +48,14 @@
 }
 
 .cardTitle {
-  font-size: 1.3rem;
+  font-size: 2rem;
   font-weight: 600;
   margin: 1rem 0 0.3rem;
   color: #222;
 }
 
 .cardDesc {
-  font-size: 0.95rem;
+  font-size: 1.7rem;
   color: #666;
   margin-bottom: 0.8rem;
   padding: 0 1rem;

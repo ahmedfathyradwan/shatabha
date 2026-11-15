@@ -42,9 +42,9 @@ export default function NavbarDesktop() {
       {/* اللينكات */}
       <div className={styles.links}>
         <Link href="/home" className={styles.link}>الرئيسية</Link>
-        <Link href="/offersPost" className={styles.link}>العروض</Link>
         <Link href="/finishChoice" className={styles.link}>التشطيب</Link>
         <Link href="/maintenance" className={styles.link}>الصيانة</Link>
+        <Link href="/offersPost" className={styles.link}>العروض</Link>
         <Link href="/about" className={styles.link}>من نحن</Link>
         <Link href="/services" className={styles.link}>تواصل معنا</Link>
       </div>

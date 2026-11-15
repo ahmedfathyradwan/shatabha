@@ -66,7 +66,7 @@ export default function ClientPage({ step }) {
       )}
 
       {/* أهمية المرحلة */}
-      {Array.isArray(step.importance) && step.importance.length > 0 && (
+      {/* {Array.isArray(step.importance) && step.importance.length > 0 && (
         <div className={styles.section}>
           <h3 className={styles.subTitle}>أهمية هذه المرحلة :</h3>
           <ul className={styles.tasksList}>
@@ -86,7 +86,7 @@ export default function ClientPage({ step }) {
             })}
           </ul>
         </div>
-      )}
+      )} */}
 
       <div className={styles.textCont}>
         {/* المطلوب تنفيذه */}
@@ -130,14 +130,14 @@ export default function ClientPage({ step }) {
           </div>
         )}
 
-        {/* الملاحظات */}
-        {step.notes && normalizeNotes(step.notes).length > 0 && (
+        {/* طريقة التأكد من الجودة */}
+        {Array.isArray(step.qualityCheck) && step.qualityCheck.length > 0 && (
           <div className={styles.section}>
-            <h3 className={styles.subTitle}>ملاحظات وتنبيهات هامة :</h3>
-            <ul className={styles.tasksList} dir="rtl">
-              {normalizeNotes(step.notes).map((item, index) => {
-                const text = typeof item === 'string' ? item : item.text
-                const link = typeof item === 'string' ? undefined : item.link
+            <h3 className={styles.subTitle}>طريقة التأكد من جودة التنفيذ :</h3>
+            <ul className={styles.tasksList}>
+              {step.qualityCheck.map((qc, index) => {
+                const text = typeof qc === 'string' ? qc : qc.text
+                const link = typeof qc === 'string' ? undefined : qc.link
                 return (
                   <li key={index} className={styles.text}>
                     {text}{' '}
@@ -153,14 +153,14 @@ export default function ClientPage({ step }) {
           </div>
         )}
 
-        {/* طريقة التأكد من الجودة */}
-        {Array.isArray(step.qualityCheck) && step.qualityCheck.length > 0 && (
+                {/* الملاحظات */}
+        {step.notes && normalizeNotes(step.notes).length > 0 && (
           <div className={styles.section}>
-            <h3 className={styles.subTitle}>طريقة التأكد من جودة التنفيذ :</h3>
-            <ul className={styles.tasksList}>
-              {step.qualityCheck.map((qc, index) => {
-                const text = typeof qc === 'string' ? qc : qc.text
-                const link = typeof qc === 'string' ? undefined : qc.link
+            <h3 className={styles.subTitle}>ملاحظات وتنبيهات هامة :</h3>
+            <ul className={styles.tasksList} dir="rtl">
+              {normalizeNotes(step.notes).map((item, index) => {
+                const text = typeof item === 'string' ? item : item.text
+                const link = typeof item === 'string' ? undefined : item.link
                 return (
                   <li key={index} className={styles.text}>
                     {text}{' '}

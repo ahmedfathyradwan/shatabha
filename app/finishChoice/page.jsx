@@ -1,3 +1,4 @@
+
 'use client';
 
 import CloseArrowIcon from '../components/icons/CloseArrowIcon';
@@ -8,6 +9,11 @@ export default function Page() {
   const router = useRouter();
 
   const cards = [
+    {
+      title: 'دليل التشطيب',
+      image: '/images/checklist.jpg',
+      link: '/finishChoice/freelance/guide',
+    },
     {
       title: 'التشطيب مع شركة',
       image: '/images/withcompany.jpg',
@@ -28,19 +34,27 @@ export default function Page() {
         <br />
         أو شطب بنفسك واختار كل حاجه في شقتك بنفسك
       </h3> */}
+
       {cards.map((card, index) => (
-        <div key={index} className={styles.card}>
-          <img src={card.image} alt={card.title} className={styles.cardImage} />
-          <div
-            className={styles.cardFooter}
-            onClick={() => router.push(card.link)}
-            style={{ cursor: 'pointer' }}
-          >
+        <div
+          key={index}
+          className={styles.card}
+          onClick={() => router.push(card.link)}
+          style={{ cursor: 'pointer' }}
+        >
+          <img
+            src={card.image}
+            alt={card.title}
+            className={styles.cardImage}
+          />
+
+          <div className={styles.cardFooter}>
             <h3 className={styles.cardTitle}>{card.title}</h3>
+
             <button
               className={styles.arrowButton}
               onClick={(e) => {
-                e.stopPropagation(); // يمنع تكرار الانتقال لو تم الضغط على الزر نفسه
+                e.stopPropagation();
                 router.push(card.link);
               }}
             >

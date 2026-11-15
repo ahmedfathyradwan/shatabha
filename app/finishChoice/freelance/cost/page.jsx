@@ -64,12 +64,12 @@ const Cost = () => {
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>
-        <h1 className={styles.title}>حساب التكلفة المبدئية للمشروع</h1>
-        <p className={styles.description}>
+        <h1 className={styles.title}>حساب التكلفة التقريبية للمشروع</h1>
+        {/* <p className={styles.description}>
           يرجى العلم بأن التكلفة هذه تقريبية وقد تختلف
           <br />
           وفقاً للتصميم والخامات
-        </p>
+        </p> */}
 
         <div className={styles.inputGroup}>
           <label className={styles.label}>نوع العقار</label>

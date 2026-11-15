@@ -1,3 +1,4 @@
+
 'use client';
 
 import CloseArrowIcon from './icons/CloseArrowIcon';
@@ -9,38 +10,44 @@ export default function FinishOrMaintenanceCard() {
 
   const cards = [
     {
-      title: 'قسم التشطيب',
+      title: 'التشطيب',
+      dis: 'تشطيب داخلي وخارجي',
       image: '/images/fin.jpg',
       link: '/finishChoice',
     },
     {
-      title: 'قسم الصيانة',
+      title: 'الصيانة',
+      dis: 'صيانة المنزل والأجهزة المنزلية',
       image: '/images/Plumbing.jpg',
       link: '/maintenance',
-    },
+    }
   ];
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>إختيار الخدمة</h2>
-      <h3 className={styles.description}>
-        اختر بين التشطيب الكامل لشقتك
-        <br />
-        أو خدمات الصيانة المنزلية المتنوعة
-      </h3>
       {cards.map((card, index) => (
-        <div key={index} className={styles.card}>
-          <img src={card.image} alt={card.title} className={styles.cardImage} />
-          <div
-            className={styles.cardFooter}
-            onClick={() => router.push(card.link)}
-            style={{ cursor: 'pointer' }}
-          >
-            <h3 className={styles.cardTitle}>{card.title}</h3>
+        <div
+          key={index}
+          className={styles.card}
+          onClick={() => router.push(card.link)}
+          style={{ cursor: 'pointer' }}
+        >
+          <img
+            src={card.image}
+            alt={card.title}
+            className={styles.cardImage}
+          />
+
+          <div className={styles.cardFooter}>
+            <div className={styles.cardText}>
+              <h3 className={styles.cardTitle}>{card.title}</h3>
+              <h5 className={styles.cardDescription}>{card.dis}</h5>
+            </div>
+
             <button
               className={styles.arrowButton}
               onClick={(e) => {
-                e.stopPropagation(); 
+                e.stopPropagation();
                 router.push(card.link);
               }}
             >

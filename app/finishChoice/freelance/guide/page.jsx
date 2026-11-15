@@ -1,4 +1,6 @@
+
 'use client';
+
 import CloseArrowIcon from '../../../components/icons/CloseArrowIcon';
 import { useRouter } from 'next/navigation';
 import styles from './guide.module.css';
@@ -22,20 +24,33 @@ export default function FinishTypeChoiceCard() {
       image: '/images/guide/open-spaces.jpg',
       link: '/finishChoice/freelance/guide/openSpaces',
     },
+    {
+      title: 'السلم والترابزين',
+      image: '/images/guide/staircase.jpg',
+      link: '/finishChoice/freelance/guide/staircase',
+    },
   ];
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>إختيار نوع التشطيب</h2>
+      <h2 className={styles.title}>إختيار قسم التشطيب</h2>
+
       {cards.map((card, index) => (
-        <div key={index} className={styles.card}>
-          <img src={card.image} alt={card.title} className={styles.cardImage} />
-          <div
-            className={styles.cardFooter}
-            onClick={() => router.push(card.link)}
-            style={{ cursor: 'pointer' }}
-          >
+        <div
+          key={index}
+          className={styles.card}
+          onClick={() => router.push(card.link)}
+          style={{ cursor: 'pointer' }}
+        >
+          <img
+            src={card.image}
+            alt={card.title}
+            className={styles.cardImage}
+          />
+
+          <div className={styles.cardFooter}>
             <h3 className={styles.cardTitle}>{card.title}</h3>
+
             <button
               className={styles.arrowButton}
               onClick={(e) => {

@@ -98,7 +98,7 @@ export default function Gallery() {
 
   return (
     <div className={styles.galleryContainer}>
-      <h2 className={styles.title}>معرض الصور</h2>
+      <h2 className={styles.title}>اختار ألوان شقتك</h2>
       <h3 className={styles.description}>تغذية بصرية لأحدث التشطيبات الفاخرة</h3>
 
       <div className={styles.buttonsWrapper}>

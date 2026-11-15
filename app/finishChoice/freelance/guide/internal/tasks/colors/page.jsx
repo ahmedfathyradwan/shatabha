@@ -12,13 +12,13 @@ export default function ColorsPage() {
       desc: "تصفح صور غرف حقيقية واختر بالتة الألوان اللي عجبتك لتطبيقها في شقتك.",
       image: "/images/visual.jpg"
     },
-    { 
-      id: 2, 
-      title: "استوحاء ألوان من قطعة أثاث موجودة",
-      path: "/finishChoice/freelance/guide/internal/tasks/colors/extract", 
-      desc: "التقاط ألوان من قطعة أثاث، لوحة، أو ستارة عندك في البيت لتبني عليها باقي البالتة.",
-      image: "/images/extract.jpg"
-    }
+    // { 
+    //   id: 2, 
+    //   title: "استوحاء ألوان من قطعة أثاث موجودة",
+    //   path: "/finishChoice/freelance/guide/internal/tasks/colors/extract", 
+    //   desc: "التقاط ألوان من قطعة أثاث، لوحة، أو ستارة عندك في البيت لتبني عليها باقي البالتة.",
+    //   image: "/images/extract.jpg"
+    // }
   ]
 
   return (

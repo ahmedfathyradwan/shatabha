@@ -1,28 +1,50 @@
 const wallDecorData = [
-  {
+    {
     id: 1,
-    title: "الدهانات التقليدية",
+    title: "الجبس بورد (Gypsum Board)",
     description:
-      "من أكثر أنواع ديكور الحوائط شيوعًا وسهولة في التنفيذ، وتمنح حرية في اختيار الألوان والتأثيرات بما يناسب كل ذوق.",
+      "يمنح الجبس بورد حرية كبيرة في تشكيل الحوائط والإضاءة، ويمكن تنفيذه بتصميمات حديثة أو كلاسيكية.",
     examples: [
-      "دهان سادة بلون واحد أو أكثر",
-      "دهانات بخطوط أو أشكال هندسية",
-      "دهانات ملمسية (رملي، إسمنتي، ميتاليك، سبوتية)",
+      "حوائط 3D بلمسات هندسية",
+      "نيشات ديكورية داخل الحائط",
+      "جبس بورد مع شرائط LED لإضاءة ناعمة",
     ],
-    suitableFor: ["غرف المعيشة", "غرف النوم", "الممرات"],
-    timing: "يتم تنفيذها بعد المحارة والمعجون وأعمال الأساس الخاصة بالنقاشة.",
+    suitableFor: ["غرف المعيشة", "الممرات", "المكاتب المنزلية"],
+    timing: "قبل أعمال النقاشة النهائية والدهانات، وبعد الانتهاء من تأسيس الكهرباء.",
     images: [
-      "/images/WallDecor/paint1.jpg",
-      "/images/WallDecor/paint2.jpg",
-      "/images/WallDecor/paint3.jpg",
-      "/images/WallDecor/paint4.jpg",
+      "/images/WallDecor/gypsum1.jpg",
+      "/images/WallDecor/gypsum2.jpg",
+      "/images/WallDecor/gypsum3.jpg",
+      "/images/WallDecor/gypsum4.jpg",
     ],
     moreLink:
-      "https://www.pinterest.com/search/pins/?q=interior%20wall%20paint%20designs",
+      "https://www.pinterest.com/search/pins/?q=gypsum%20board%20wall%20design",
   },
-  {
+    {
     id: 2,
-    title: "ورق الجدران (Wallpaper)",
+    title: "الحجر الطبيعي أو الصناعي",
+    description:
+      "الحجر يعطي مظهرًا فاخرًا وأنيقًا، سواء طبيعي أو صناعي، وغالبًا يُستخدم كحائط مميز داخل الشقة.",
+    examples: [
+      "رخام طبيعي أو جرانيت",
+      "حجر صناعي بأشكال متعددة",
+      "دمج الحجر مع الدهان أو الإضاءة المخفية",
+    ],
+    suitableFor: ["المداخل", "غرف المعيشة", "حوائط التلفاز"],
+    timing: "بعد المحارة وقبل الدهانات النهائية، ويفضّل قبل تركيب الأرضيات النهائية لتجنب الاتساخ.",
+    images: [
+      "/images/WallDecor/stone1.jpg",
+      "/images/WallDecor/stone2.jpg",
+      "/images/WallDecor/stone3.jpg",
+      "/images/WallDecor/stone4.jpg",
+    ],
+    moreLink:
+      "https://www.pinterest.com/search/pins/?q=stone%20wall%20interior",
+  },
+
+  {
+    id: 3,
+    title: "ورق الحائط (Wallpaper)",
     description:
       "ورق الحائط يعطي لمسة فخمة وسريعة التركيب، ويأتي بتصاميم وألوان متنوعة تناسب كل أسلوب ديكور.",
     examples: [
@@ -42,7 +64,7 @@ const wallDecorData = [
       "https://www.pinterest.com/search/pins/?q=modern%20wallpaper%20designs",
   },
   {
-    id: 3,
+    id: 4,
     title: "الخشب (Wood Panels)",
     description:
       "الخشب يمنح إحساسًا بالدفء والفخامة ويُستخدم عادة في الحوائط المميزة أو الغرف الرسمية.",
@@ -63,70 +85,7 @@ const wallDecorData = [
       "https://www.pinterest.com/search/pins/?q=wood%20wall%20interior%20design",
   },
   {
-    id: 4,
-    title: "الحجر الطبيعي أو الصناعي",
-    description:
-      "الحجر يعطي مظهرًا فاخرًا وأنيقًا، سواء طبيعي أو صناعي، وغالبًا يُستخدم كحائط مميز داخل الشقة.",
-    examples: [
-      "رخام طبيعي أو جرانيت",
-      "حجر صناعي بأشكال متعددة",
-      "دمج الحجر مع الدهان أو الإضاءة المخفية",
-    ],
-    suitableFor: ["المداخل", "غرف المعيشة", "حوائط التلفاز"],
-    timing: "بعد المحارة وقبل الدهانات النهائية، ويفضّل قبل تركيب الأرضيات النهائية لتجنب الاتساخ.",
-    images: [
-      "/images/WallDecor/stone1.jpg",
-      "/images/WallDecor/stone2.jpg",
-      "/images/WallDecor/stone3.jpg",
-      "/images/WallDecor/stone4.jpg",
-    ],
-    moreLink:
-      "https://www.pinterest.com/search/pins/?q=stone%20wall%20interior",
-  },
-  {
     id: 5,
-    title: "البانوهات والديكور الجاهز (Panels & Moldings)",
-    description:
-      "أسلوب ديكوري أنيق يمكن تنفيذه بأنماط كلاسيكية أو حديثة باستخدام بانوهات خشبية أو MDF.",
-    examples: [
-      "بانوهات كلاسيكية بزخارف فرنسية",
-      "Paneling حديث بخطوط رأسية أو أفقية",
-      "تقسيم الحائط لمربعات أو مستطيلات أنيقة",
-    ],
-    suitableFor: ["غرف الاستقبال", "المكاتب", "غرف النوم الرئيسية"],
-    timing: "بعد المعجون والدهان التمهيدي وقبل الدهانات النهائية.",
-    images: [
-      "/images/WallDecor/panel1.jpg",
-      "/images/WallDecor/panel2.jpg",
-      "/images/WallDecor/panel3.jpg",
-      "/images/WallDecor/panel4.jpg",
-    ],
-    moreLink:
-      "https://www.pinterest.com/search/pins/?q=wall%20panel%20molding%20design",
-  },
-  {
-    id: 6,
-    title: "الجبس بورد (Gypsum Board)",
-    description:
-      "يمنح الجبس بورد حرية كبيرة في تشكيل الحوائط والإضاءة، ويمكن تنفيذه بتصميمات حديثة أو كلاسيكية.",
-    examples: [
-      "حوائط 3D بلمسات هندسية",
-      "نيشات ديكورية داخل الحائط",
-      "جبس بورد مع شرائط LED لإضاءة ناعمة",
-    ],
-    suitableFor: ["غرف المعيشة", "الممرات", "المكاتب المنزلية"],
-    timing: "قبل أعمال النقاشة النهائية والدهانات، وبعد الانتهاء من تأسيس الكهرباء.",
-    images: [
-      "/images/WallDecor/gypsum1.jpg",
-      "/images/WallDecor/gypsum2.jpg",
-      "/images/WallDecor/gypsum3.jpg",
-      "/images/WallDecor/gypsum4.jpg",
-    ],
-    moreLink:
-      "https://www.pinterest.com/search/pins/?q=gypsum%20board%20wall%20design",
-  },
-  {
-    id: 7,
     title: "المرايا والديكور الزجاجي (Mirrors & Glass Decor)",
     description:
       "المرايا والزجاج يضيفان عمقًا وإشراقًا للمكان، ويستخدمان لتوسيع الإحساس البصري بالمساحة.",
@@ -147,7 +106,7 @@ const wallDecorData = [
       "https://www.pinterest.com/search/pins/?q=mirror%20wall%20interior%20design",
   },
 {
-  id: 8,
+  id: 6,
   title: "ألواح PVC (PVC Panels)",
   description:
     "ألواح PVC تُعتبر من أحدث وأفضل حلول ديكور الحوائط الحديثة، لأنها تجمع بين المظهر العصري وسهولة التركيب والتنظيف. تتميز بخفة وزنها ومقاومتها العالية للرطوبة، مما يجعلها مثالية للمطابخ والحمامات.",
@@ -167,8 +126,29 @@ const wallDecorData = [
   moreLink:
     "https://www.pinterest.com/search/pins/?q=pvc%20wall%20panel%20design",
 },
+ {
+    id: 7,
+    title: "البانوهات والديكور الجاهز (Panels & Moldings)",
+    description:
+      "أسلوب ديكوري أنيق يمكن تنفيذه بأنماط كلاسيكية أو حديثة باستخدام بانوهات خشبية أو MDF.",
+    examples: [
+      "بانوهات كلاسيكية بزخارف فرنسية",
+      "Paneling حديث بخطوط رأسية أو أفقية",
+      "تقسيم الحائط لمربعات أو مستطيلات أنيقة",
+    ],
+    suitableFor: ["غرف الاستقبال", "المكاتب", "غرف النوم الرئيسية"],
+    timing: "بعد المعجون والدهان التمهيدي وقبل الدهانات النهائية.",
+    images: [
+      "/images/WallDecor/panel1.jpg",
+      "/images/WallDecor/panel2.jpg",
+      "/images/WallDecor/panel3.jpg",
+      "/images/WallDecor/panel4.jpg",
+    ],
+    moreLink:
+      "https://www.pinterest.com/search/pins/?q=wall%20panel%20molding%20design",
+  },
   {
-  id: 9,
+  id: 8,
   title: "اللوحات الفنية والتابلوهات (Wall Art & Frames)",
   description:
     "تُعد اللوحات الفنية والتابلوهات من أهم عناصر التزيين النهائية، وتساعد على إبراز طابع المكان وإضافة لمسة فنية وشخصية على الديكور.",
@@ -193,7 +173,27 @@ const wallDecorData = [
   ],
   moreLink:
     "https://www.pinterest.com/search/pins/?q=modern%20wall%20art%20frames",
-},
+},  {
+    id: 9,
+    title: "الدهانات التقليدية",
+    description:
+      "من أكثر أنواع ديكور الحوائط شيوعًا وسهولة في التنفيذ، وتمنح حرية في اختيار الألوان والتأثيرات بما يناسب كل ذوق.",
+    examples: [
+      "دهان سادة بلون واحد أو أكثر",
+      "دهانات بخطوط أو أشكال هندسية",
+      "دهانات ملمسية (رملي، إسمنتي، ميتاليك، سبوتية)",
+    ],
+    suitableFor: ["غرف المعيشة", "غرف النوم", "الممرات"],
+    timing: "يتم تنفيذها بعد المحارة والمعجون وأعمال الأساس الخاصة بالنقاشة.",
+    images: [
+      "/images/WallDecor/paint1.jpg",
+      "/images/WallDecor/paint2.jpg",
+      "/images/WallDecor/paint3.jpg",
+      "/images/WallDecor/paint4.jpg",
+    ],
+    moreLink:
+      "https://www.pinterest.com/search/pins/?q=interior%20wall%20paint%20designs",
+  },
 
 ];
 

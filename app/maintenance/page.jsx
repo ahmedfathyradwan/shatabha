@@ -1,4 +1,6 @@
+
 "use client";
+
 import React from 'react';
 import styles from './maintenance.module.css';
 import CloseArrowIcon from '../components/icons/CloseArrowIcon';
@@ -10,16 +12,19 @@ const Maintenance = () => {
   const cards = [
     {
       title: 'نشر طلب صيانة',
+      discription: 'نشر طلب صيانة وانتظار العروض من مقدمي الخدمة',
       image: '/images/freelance/3.jpg',
       link: '/maintenance/maintenanceRequest',
     },
     {
       title: 'مكاتب وشركات صيانة',
+      discription: 'التواصل مع مكاتب وشركات الصيانة المعتمدة',
       image: '/images/withcompany/1.jpg',
       link: '/maintenance/maintenanceCompanies',
     },
     {
       title: 'مقدمي خدمة مستقلين',
+      discription: 'التواصل مع مقدمي خدمة مستقلين في مجال الصيانة',
       image: '/images/Plumbing.jpg',
       link: '/maintenance/maintenanceTechnicians',
     },
@@ -29,17 +34,27 @@ const Maintenance = () => {
     <>
       <div className={styles.container}>
         <h2 className={styles.title}>قسم الصيانة</h2>
-        <p className={styles.par}>أعمال الصيانة المنزلية وصيانة الأجهزة المنزلية</p>
+        <p className={styles.par}>
+          أعمال الصيانة المنزلية وصيانة الأجهزة المنزلية
+        </p>
+
         <div className={styles.cardsGrid}>
           {cards.map((card, index) => (
-            <div key={index} className={styles.card}>
-              <img src={card.image} alt={card.title} className={styles.cardImage} />
-              <div
-                className={styles.cardFooter}
-                onClick={() => router.push(card.link)}
-                style={{ cursor: 'pointer' }}
-              >
+            <div
+              key={index}
+              className={styles.card}
+              onClick={() => router.push(card.link)}
+              style={{ cursor: 'pointer' }}
+            >
+              <img
+                src={card.image}
+                alt={card.title}
+                className={styles.cardImage}
+              />
+
+              <div className={styles.cardFooter}>
                 <h3>{card.title}</h3>
+
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
@@ -54,6 +69,7 @@ const Maintenance = () => {
           ))}
         </div>
       </div>
+
       <div className={styles.marginBottom}></div>
     </>
   );

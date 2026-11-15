@@ -17,8 +17,8 @@ export default function TechniciansPage() {
   return (
     <div className={styles.wrap}>
       <header className={styles.header}>
-        <h1>الفنيين المتاحين</h1>
-        <p className={styles.lead}>قائمة مختصرة بالفنيين والخبراء المتوفرين على الموقع</p>
+        <h1>المستقليين</h1>
+        <p className={styles.lead}>قائمة مختصرة بالمستقليين والخبراء </p>
 
         {/* قائمة اختيار التخصص */}
         <div className={styles.filterBox}>

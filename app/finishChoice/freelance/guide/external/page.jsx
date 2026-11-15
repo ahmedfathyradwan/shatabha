@@ -10,9 +10,8 @@ export default function Page() {
   const [selectedImage, setSelectedImage] = useState(null); // ✅ الصورة المختارة
 
   const guide = {
-    title: "دليل الواجهات الخارجية",
-    content:
-      "اكتشف أنواع تشطيبات الواجهات المختلفة ومميزاتها ومناسبتها للمشروعات المختلفة.",
+    title: "أنواع الواجهات الخارجية",
+    content: "اختار نوع والواجهة المناسب لوحدتك.",
   };
 
   return (
@@ -32,21 +31,26 @@ export default function Page() {
               style={{ cursor: "pointer" }}
             />
 
-            {/* ✅ العنوان */}
-            <h2 className={styles.facadeName}>{facade.title}</h2>
+            <div className={styles.facadeName}>
+              {/* <h4>الواجهة </h4> */}
+              <h2>{facade.id}- {facade.title}</h2>
+            </div>
 
             {/* ✅ المميزات */}
-            <ul className={styles.featureList}>
-              {facade.features.map((feature, index) => (
-                <li key={index} className={styles.featureItem}>
-                  {feature}
-                </li>
-              ))}
-            </ul>
+            <div className={styles.featureList}>
+              <h4>الوصف:</h4>
+              <ul>
+                {facade.features.map((feature, index) => (
+                  <li key={index} className={styles.featureItem}>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             {/* ✅ المسؤولين */}
             <div className={styles.responsibleList}>
-              <h4>المسؤولين:</h4>
+              <h4>مسئول التنفيذ:</h4>
               <ul>
                 {facade.responsible.map((person, idx) => (
                   <li key={idx}>{person}</li>
@@ -76,7 +80,7 @@ export default function Page() {
                 router.push(`/freelance/technicians?type=${facade.slug}`)
               }
             >
-              اختيار منفذ الخدمة المناسب
+              اختيار منفذ الخدمة
             </button>
           </div>
         ))}
@@ -88,7 +92,11 @@ export default function Page() {
           className={styles.modalOverlay}
           onClick={() => setSelectedImage(null)} // إغلاق عند الضغط بالخارج
         >
-          <img src={selectedImage} alt="Facade full view" className={styles.modalImage} />
+          <img
+            src={selectedImage}
+            alt="Facade full view"
+            className={styles.modalImage}
+          />
         </div>
       )}
     </div>

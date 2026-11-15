@@ -10,7 +10,9 @@ import Link from 'next/link';
 export default async function HomePage() {
   return (
     <div className={styles.homeContainer}>
-      <div className={styles.heroSection}>
+
+      {/* الشكل القديم للصفحة الرئيسية */}
+      {/* <div className={styles.heroSection}>
         <div className={styles.imgContainer}>
           <Image
             src="/images/logo.png"
@@ -44,15 +46,17 @@ export default async function HomePage() {
             </Link>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <section id="services" className={styles.servicesSection}>
-        <div className={styles.monthlyOffers}>
-          <MonthlyOffers />
-        </div>
         <div className={styles.finishOrMaintenanceCard} id="chooseService">
           <FinishOrMaintenanceCard />
         </div>
+
+        <div className={styles.monthlyOffers}>
+          <MonthlyOffers />
+        </div>
+
         <div className={styles.onlineSection}>
           <OnlineSection />
         </div>

@@ -13,8 +13,8 @@ export default function AboutUs() {
       <h3 className={styles.shatab}>SHATABHA<span className={styles.shatabSpan}>.com</span></h3>
       <h3 className={styles.description}>
           منصتك الذكية لتشطيب شقتك بسهولة وبأفضل جودة.<br />
-        كل اللي تحتاجه لتشطيب شقتك في مكان واحد.<br />
-        شركات موثوقة وفنيين محترفين… بسهولة وبدون تعقيد.
+        {/* كل اللي تحتاجه لتشطيب شقتك في مكان واحد.<br /> */}
+        {/* شركات موثوقة وفنيين محترفين… بسهولة وبدون تعقيد. */}
       </h3>
     </section>
   );

@@ -24,6 +24,7 @@ export default function FinishOrMaintenanceCard() {
   ];
 
   return (
+    <>
     <div className={styles.container}>
       <h1 className={styles.title}>خدماتنا</h1>
       {cards.map((card, index) => (
@@ -58,5 +59,6 @@ export default function FinishOrMaintenanceCard() {
         </div>
       ))}
     </div>
+    </>
   );
 }

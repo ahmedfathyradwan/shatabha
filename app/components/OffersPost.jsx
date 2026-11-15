@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import offersData from "../mockData/offersData";
 import styles from "../offersPost/OffersPost.module.css";
-
+import WhatsappIcon from '../components/icons/WhatsappIcon';
+import PhoneIcon from '../components/icons/PhoneIcon';
 export default function OffersPost() {
   const router = useRouter();
   const [filter, setFilter] = useState("الأفضل");
@@ -20,6 +21,9 @@ export default function OffersPost() {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>عروض الشهر</h2>
+            <p className={styles.intro}>
+       عروض حصرية لمستلزمات التشطيب والديكور.
+      </p>
 
       <div className={styles.filterButtons}>
         {["الأفضل", "الكل", "سيراميك", "خشب", "أبواب", "دهانات", "تشطيب"].map(
@@ -53,6 +57,7 @@ export default function OffersPost() {
               <div className={styles.contactButtons}>
                 <a href={`tel:${offer.phone}`} className={styles.callButton}>
                    اتصل الآن
+                <PhoneIcon className={styles.icon} />
                 </a>
                 <a
                   href={`https://wa.me/${offer.phone.replace(/^0/, "2")}`}
@@ -61,6 +66,7 @@ export default function OffersPost() {
                   className={styles.whatsappButton}
                 >
                    واتساب
+                   <WhatsappIcon className={styles.icon} />
                 </a>
               </div>
             </div>

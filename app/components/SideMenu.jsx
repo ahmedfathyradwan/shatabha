@@ -1,3 +1,4 @@
+
 'use client';
 
 import CloseArrowIcon from './icons/CloseArrowIcon';
@@ -6,11 +7,18 @@ import styles from '../styles/sideMenu.module.css';
 
 export default function SideMenu({ onClose }) {
   return (
-    <div className={styles.overlay}>
-      <div className={styles.menu}>
+    <div
+      className={styles.overlay}
+      onClick={onClose}
+    >
+      <div
+        className={styles.menu}
+        onClick={(e) => e.stopPropagation()}
+      >
         <button onClick={onClose} className={styles.closeButton}>
           <CloseArrowIcon className={styles.closeIcon} />
         </button>
+
         <nav className={styles.links}>
           <Link href="/home" onClick={onClose} className={`${styles.link} ${styles.firstLink}`}>الرئيسية</Link>
           <Link href="/finishChoice" onClick={onClose} className={`${styles.link} ${styles.firstLink}`}>قسم التشطيب</Link>

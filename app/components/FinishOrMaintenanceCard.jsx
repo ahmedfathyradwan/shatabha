@@ -11,13 +11,13 @@ export default function FinishOrMaintenanceCard() {
   const cards = [
     {
       title: 'التشطيب',
-      dis: 'تشطيب داخلي وخارجي',
+      description: 'تشطيب داخلي وخارجي',
       image: '/images/fin.jpg',
       link: '/finishChoice',
     },
     {
       title: 'الصيانة',
-      dis: 'صيانة المنزل والأجهزة المنزلية',
+      description: 'صيانة المنزل والأجهزة المنزلية',
       image: '/images/Plumbing.jpg',
       link: '/maintenance',
     }
@@ -25,6 +25,7 @@ export default function FinishOrMaintenanceCard() {
 
   return (
     <div className={styles.container}>
+      <h1 className={styles.title}>خدماتنا</h1>
       {cards.map((card, index) => (
         <div
           key={index}
@@ -41,7 +42,7 @@ export default function FinishOrMaintenanceCard() {
           <div className={styles.cardFooter}>
             <div className={styles.cardText}>
               <h3 className={styles.cardTitle}>{card.title}</h3>
-              <h5 className={styles.cardDescription}>{card.dis}</h5>
+              <h5 className={styles.cardDescription}>{card.description}</h5>
             </div>
 
             <button

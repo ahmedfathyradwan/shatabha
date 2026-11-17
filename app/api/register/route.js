@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import getDB from '../../lib/db';
+import getDB, { initDB, normalizePhone } from '../../lib/db';
 
 function generateOTP() {
   return Math.floor(100000 + Math.random() * 900000).toString();
@@ -11,7 +11,7 @@ export async function POST(request) {
     const body = await request.json();
     const {
       fullName,
-      phone,
+      phone: rawPhone,
       password,
       role,
       providerType,
@@ -21,6 +21,8 @@ export async function POST(request) {
       exhibitionType,
       address,
     } = body;
+
+    const phone = normalizePhone(rawPhone);
 
     // ============ Validation ============
     if (!fullName || !phone || !password || !role) {
@@ -58,11 +60,17 @@ export async function POST(request) {
       );
     }
 
+    // ============ Init DB & get client ============
+    await initDB();
     const db = getDB();
 
     // ============ Check existing user ============
-    const existingUser = db.prepare('SELECT id FROM users WHERE phone = ?').get(phone);
-    if (existingUser) {
+    const existingResult = await db.execute({
+      sql: 'SELECT id FROM users WHERE phone = ?',
+      args: [phone],
+    });
+
+    if (existingResult.rows.length > 0) {
       return NextResponse.json(
         { error: 'رقم الهاتف هذا مسجل مسبقاً' },
         { status: 409 }
@@ -78,44 +86,37 @@ export async function POST(request) {
 
     console.log(`\n🔐 OTP لـ ${phone}: ${otp}\n`);
 
-    // ============ Create User (transaction) ============
-    const insertUser = db.prepare(`
-      INSERT INTO users (phone, password, full_name, role, is_verified, otp_code, otp_expires_at)
-      VALUES (?, ?, ?, ?, 0, ?, ?)
-    `);
+    // ============ Insert User ============
+    const insertResult = await db.execute({
+      sql: `INSERT INTO users (phone, password, full_name, role, is_verified, otp_code, otp_expires_at)
+            VALUES (?, ?, ?, ?, 0, ?, ?)`,
+      args: [phone, hashedPassword, fullName, role, otp, otpExpiresAt],
+    });
 
-    const insertClientProfile = db.prepare(`
-      INSERT INTO client_profiles (user_id) VALUES (?)
-    `);
+    const userId = Number(insertResult.lastInsertRowid);
 
-    const insertProviderProfile = db.prepare(`
-      INSERT INTO provider_profiles 
-        (user_id, provider_type, address, specialization, job_title, avg_price, exhibition_type)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
-    `);
-
-    const transaction = db.transaction(() => {
-      const result = insertUser.run(phone, hashedPassword, fullName, role, otp, otpExpiresAt);
-      const userId = result.lastInsertRowid;
-
-      if (role === 'client') {
-        insertClientProfile.run(userId);
-      } else if (role === 'serviceProvider') {
-        insertProviderProfile.run(
+    // ============ Insert Profile ============
+    if (role === 'client') {
+      await db.execute({
+        sql: 'INSERT INTO client_profiles (user_id) VALUES (?)',
+        args: [userId],
+      });
+    } else if (role === 'serviceProvider') {
+      await db.execute({
+        sql: `INSERT INTO provider_profiles 
+              (user_id, provider_type, address, specialization, job_title, avg_price, exhibition_type)
+              VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        args: [
           userId,
           providerType,
           address || null,
           providerType === 'company' ? (specialization || null) : null,
           providerType === 'freelancer' ? (jobTitle || null) : null,
           providerType === 'freelancer' ? (avgPrice ? parseFloat(avgPrice) : null) : null,
-          providerType === 'exhibition' ? (exhibitionType || null) : null
-        );
-      }
-
-      return userId;
-    });
-
-    transaction();
+          providerType === 'exhibition' ? (exhibitionType || null) : null,
+        ],
+      });
+    }
 
     return NextResponse.json(
       { message: 'تم إنشاء الحساب بنجاح، يرجى التحقق من رقم هاتفك' },
@@ -125,7 +126,7 @@ export async function POST(request) {
   } catch (error) {
     console.error('❌ Register error:', error);
 
-    if (error.message?.includes('UNIQUE constraint failed')) {
+    if (error.message?.includes('UNIQUE constraint failed') || error.message?.includes('UNIQUE')) {
       return NextResponse.json(
         { error: 'رقم الهاتف هذا مسجل مسبقاً' },
         { status: 409 }

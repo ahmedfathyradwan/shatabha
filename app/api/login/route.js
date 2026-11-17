@@ -1,14 +1,15 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import getDB from '../../lib/db';
+import getDB, { initDB, normalizePhone } from '../../lib/db';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { phone, password } = body;
+    const { phone: rawPhone, password } = body;
+    const phone = normalizePhone(rawPhone);
 
     if (!phone || !password) {
       return NextResponse.json(
@@ -17,10 +18,16 @@ export async function POST(request) {
       );
     }
 
+    await initDB();
     const db = getDB();
 
     // ============ Find User ============
-    const user = db.prepare('SELECT * FROM users WHERE phone = ?').get(phone);
+    const result = await db.execute({
+      sql: 'SELECT * FROM users WHERE phone = ?',
+      args: [phone],
+    });
+
+    const user = result.rows[0];
 
     if (!user) {
       return NextResponse.json(
@@ -49,20 +56,23 @@ export async function POST(request) {
     // ============ Get Profile data ============
     let providerType = null;
     if (user.role === 'serviceProvider') {
-      const profile = db.prepare('SELECT provider_type FROM provider_profiles WHERE user_id = ?').get(user.id);
-      if (profile) providerType = profile.provider_type;
+      const profileResult = await db.execute({
+        sql: 'SELECT provider_type FROM provider_profiles WHERE user_id = ?',
+        args: [user.id],
+      });
+      if (profileResult.rows.length > 0) providerType = profileResult.rows[0].provider_type;
     }
 
     // ============ Generate JWT ============
     const token = jwt.sign(
-      { id: user.id, phone: user.phone, role: user.role },
+      { id: Number(user.id), phone: user.phone, role: user.role },
       JWT_SECRET,
       { expiresIn: '7d' }
     );
 
     // ============ Build user data ============
     const userData = {
-      id: user.id,
+      id: Number(user.id),
       fullName: user.full_name,
       phone: user.phone,
       role: user.role,

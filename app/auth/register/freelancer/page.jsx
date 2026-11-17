@@ -177,7 +177,7 @@ export default function FreelancerRegisterPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              maxLength={6}
+              minLength={6}
             />
           </div>
 

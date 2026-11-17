@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import getDB from '../../lib/db';
+import getDB, { initDB, normalizePhone } from '../../lib/db';
 
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { phone, newPassword } = body;
+    const { phone: rawPhone, newPassword } = body;
+    const phone = normalizePhone(rawPhone);
 
     if (!phone || !newPassword) {
       return NextResponse.json(
@@ -21,10 +22,15 @@ export async function POST(request) {
       );
     }
 
+    await initDB();
     const db = getDB();
-    const user = db.prepare('SELECT id FROM users WHERE phone = ?').get(phone);
 
-    if (!user) {
+    const result = await db.execute({
+      sql: 'SELECT id FROM users WHERE phone = ?',
+      args: [phone],
+    });
+
+    if (result.rows.length === 0) {
       return NextResponse.json(
         { error: 'رقم الهاتف غير مسجل' },
         { status: 404 }
@@ -33,11 +39,12 @@ export async function POST(request) {
 
     const hashedPassword = await bcrypt.hash(newPassword, 12);
 
-    db.prepare(`
-      UPDATE users 
-      SET password = ?, otp_code = NULL, otp_expires_at = NULL, updated_at = datetime('now') 
-      WHERE phone = ?
-    `).run(hashedPassword, phone);
+    await db.execute({
+      sql: `UPDATE users 
+            SET password = ?, otp_code = NULL, otp_expires_at = NULL, updated_at = datetime('now') 
+            WHERE phone = ?`,
+      args: [hashedPassword, phone],
+    });
 
     return NextResponse.json(
       { message: 'تم تغيير كلمة المرور بنجاح' },

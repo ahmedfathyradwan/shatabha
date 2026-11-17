@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
-import getDB from '../../../lib/db';
+import getDB, { initDB } from '../../../lib/db';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 
@@ -26,31 +26,35 @@ export async function GET(request) {
       );
     }
 
+    await initDB();
     const db = getDB();
 
-    const user = db.prepare(`
-      SELECT 
-        u.id, 
-        u.phone, 
-        u.full_name AS fullName, 
-        u.role, 
-        u.is_verified AS isVerified, 
-        u.created_at AS createdAt,
-        cp.avatar_url AS clientAvatar,
-        pp.provider_type AS providerType,
-        pp.address,
-        pp.specialization,
-        pp.job_title AS jobTitle,
-        pp.avg_price AS avgPrice,
-        pp.exhibition_type AS exhibitionType,
-        pp.rating,
-        pp.bio,
-        pp.avatar_url AS providerAvatar
-      FROM users u
-      LEFT JOIN client_profiles cp ON u.id = cp.user_id
-      LEFT JOIN provider_profiles pp ON u.id = pp.user_id
-      WHERE u.id = ?
-    `).get(decoded.id);
+    const result = await db.execute({
+      sql: `SELECT 
+              u.id, 
+              u.phone, 
+              u.full_name AS fullName, 
+              u.role, 
+              u.is_verified AS isVerified, 
+              u.created_at AS createdAt,
+              cp.avatar_url AS clientAvatar,
+              pp.provider_type AS providerType,
+              pp.address,
+              pp.specialization,
+              pp.job_title AS jobTitle,
+              pp.avg_price AS avgPrice,
+              pp.exhibition_type AS exhibitionType,
+              pp.rating,
+              pp.bio,
+              pp.avatar_url AS providerAvatar
+            FROM users u
+            LEFT JOIN client_profiles cp ON u.id = cp.user_id
+            LEFT JOIN provider_profiles pp ON u.id = pp.user_id
+            WHERE u.id = ?`,
+      args: [decoded.id],
+    });
+
+    const user = result.rows[0];
 
     if (!user) {
       return NextResponse.json(
@@ -60,7 +64,7 @@ export async function GET(request) {
     }
 
     const userData = {
-      id: user.id,
+      id: Number(user.id),
       fullName: user.fullName,
       phone: user.phone,
       role: user.role,

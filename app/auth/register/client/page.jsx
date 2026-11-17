@@ -90,7 +90,13 @@ const ClientRegister = () => {
               type="tel"
               className={styles.input}
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => {
+                let val = e.target.value;
+                val = val.replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+                val = val.replace(/[^0-9]/g, "");
+                val = val.slice(0, 11);
+                setPhone(val);
+              }}
               placeholder="يفضل يكون به حساب واتساب"
               required
               pattern="^01[0125][0-9]{8}$"
@@ -107,7 +113,7 @@ const ClientRegister = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              maxLength={6}
+              minLength={6}
             />
           </div>
 

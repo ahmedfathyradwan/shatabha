@@ -137,7 +137,13 @@ export default function MaterialsRegisterPage() {
               className={styles.input}
               placeholder="يفضل يكون به حساب واتساب"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => {
+                let val = e.target.value;
+                val = val.replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+                val = val.replace(/[^0-9]/g, "");
+                val = val.slice(0, 11);
+                setPhone(val);
+              }}
               required
               pattern="^01[0125][0-9]{8}$"
               maxLength={11}

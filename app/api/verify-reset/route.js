@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server';
-import getDB from '../../lib/db';
+import getDB, { initDB, normalizePhone } from '../../lib/db';
 
 // POST /api/verify-reset - التحقق من OTP لإعادة تعيين كلمة المرور (بدون تفعيل الحساب)
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { phone, otp } = body;
+    const { phone: rawPhone, otp } = body;
+    const phone = normalizePhone(rawPhone);
 
     if (!phone || !otp) {
       return NextResponse.json(
@@ -14,8 +15,14 @@ export async function POST(request) {
       );
     }
 
+    await initDB();
     const db = getDB();
-    const user = db.prepare('SELECT * FROM users WHERE phone = ?').get(phone);
+
+    const result = await db.execute({
+      sql: 'SELECT * FROM users WHERE phone = ?',
+      args: [phone],
+    });
+    const user = result.rows[0];
 
     if (!user) {
       return NextResponse.json(

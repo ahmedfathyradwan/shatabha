@@ -1,40 +1,45 @@
-import Database from 'better-sqlite3';
-import path from 'path';
+import { createClient } from '@libsql/client';
 
-// مسار قاعدة البيانات
-const DB_PATH = path.join(process.cwd(), 'dev.db');
+// ============================================================
+// قاعدة البيانات - Turso (SQLite in the Cloud)
+// متغيرات البيئة المطلوبة في Vercel:
+//   TURSO_DATABASE_URL  - رابط قاعدة البيانات (libsql://...)
+//   TURSO_AUTH_TOKEN    - مفتاح التوثيق
+// للتشغيل المحلي: DATABASE_URL=file:./dev.db (بدون AUTH_TOKEN)
+// ============================================================
 
-// إنشاء/فتح قاعدة البيانات
-let db;
+let client;
 
 function getDB() {
-  if (!db) {
-    db = new Database(DB_PATH);
-    db.pragma('journal_mode = WAL');
-    db.pragma('foreign_keys = ON');
-    initDB(db);
+  if (!client) {
+    const url = process.env.TURSO_DATABASE_URL || process.env.DATABASE_URL || 'file:./dev.db';
+    const authToken = process.env.TURSO_AUTH_TOKEN;
+
+    client = createClient({
+      url,
+      authToken: authToken || undefined,
+    });
   }
-  return db;
+  return client;
 }
 
-// إنشاء الجداول عند أول تشغيل
-function initDB(database) {
-  database.exec(`
-    -- جدول المستخدمين الأساسي
+// إنشاء الجداول عند أول طلب
+export async function initDB() {
+  const db = getDB();
+  await db.executeMultiple(`
     CREATE TABLE IF NOT EXISTS users (
-      id          INTEGER PRIMARY KEY AUTOINCREMENT,
-      phone       TEXT    UNIQUE NOT NULL,
-      password    TEXT    NOT NULL,
-      full_name   TEXT    NOT NULL,
-      role        TEXT    NOT NULL CHECK(role IN ('client', 'serviceProvider', 'admin')),
-      is_verified INTEGER NOT NULL DEFAULT 0,
-      otp_code    TEXT,
-      otp_expires_at TEXT,
-      created_at  TEXT    NOT NULL DEFAULT (datetime('now')),
-      updated_at  TEXT    NOT NULL DEFAULT (datetime('now'))
+      id              INTEGER PRIMARY KEY AUTOINCREMENT,
+      phone           TEXT    UNIQUE NOT NULL,
+      password        TEXT    NOT NULL,
+      full_name       TEXT    NOT NULL,
+      role            TEXT    NOT NULL,
+      is_verified     INTEGER NOT NULL DEFAULT 0,
+      otp_code        TEXT,
+      otp_expires_at  TEXT,
+      created_at      TEXT    NOT NULL DEFAULT (datetime('now')),
+      updated_at      TEXT    NOT NULL DEFAULT (datetime('now'))
     );
 
-    -- جدول بيانات العملاء
     CREATE TABLE IF NOT EXISTS client_profiles (
       id         INTEGER PRIMARY KEY AUTOINCREMENT,
       user_id    INTEGER UNIQUE NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -43,11 +48,10 @@ function initDB(database) {
       updated_at TEXT NOT NULL DEFAULT (datetime('now'))
     );
 
-    -- جدول بيانات مقدمي الخدمة
     CREATE TABLE IF NOT EXISTS provider_profiles (
       id              INTEGER PRIMARY KEY AUTOINCREMENT,
       user_id         INTEGER UNIQUE NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      provider_type   TEXT NOT NULL CHECK(provider_type IN ('company', 'freelancer', 'exhibition')),
+      provider_type   TEXT NOT NULL,
       address         TEXT,
       avatar_url      TEXT,
       bio             TEXT,
@@ -60,6 +64,15 @@ function initDB(database) {
       updated_at      TEXT NOT NULL DEFAULT (datetime('now'))
     );
   `);
+}
+
+export function normalizePhone(phone) {
+  if (!phone) return '';
+  return phone
+    .toString()
+    .replace(/[٠-٩]/g, (d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))
+    .replace(/[^0-9]/g, '')
+    .trim();
 }
 
 export default getDB;

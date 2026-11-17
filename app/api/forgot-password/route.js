@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import getDB from '../../lib/db';
+import getDB, { initDB, normalizePhone } from '../../lib/db';
 
 function generateOTP() {
   return Math.floor(100000 + Math.random() * 900000).toString();
@@ -8,7 +8,8 @@ function generateOTP() {
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { phone } = body;
+    const { phone: rawPhone } = body;
+    const phone = normalizePhone(rawPhone);
 
     if (!phone) {
       return NextResponse.json(
@@ -17,10 +18,15 @@ export async function POST(request) {
       );
     }
 
+    await initDB();
     const db = getDB();
-    const user = db.prepare('SELECT id FROM users WHERE phone = ?').get(phone);
 
-    if (!user) {
+    const result = await db.execute({
+      sql: 'SELECT id FROM users WHERE phone = ?',
+      args: [phone],
+    });
+
+    if (result.rows.length === 0) {
       // لا نكشف إذا كان الرقم مسجلاً لأسباب أمنية
       return NextResponse.json(
         { message: 'إذا كان الرقم مسجلاً، ستصلك رسالة بكود التحقق' },
@@ -33,9 +39,10 @@ export async function POST(request) {
 
     console.log(`\n🔑 OTP إعادة تعيين كلمة المرور لـ ${phone}: ${otp}\n`);
 
-    db.prepare(`
-      UPDATE users SET otp_code = ?, otp_expires_at = ?, updated_at = datetime('now') WHERE phone = ?
-    `).run(otp, otpExpiresAt, phone);
+    await db.execute({
+      sql: `UPDATE users SET otp_code = ?, otp_expires_at = ?, updated_at = datetime('now') WHERE phone = ?`,
+      args: [otp, otpExpiresAt, phone],
+    });
 
     return NextResponse.json(
       { message: 'تم إرسال كود التحقق' },

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
-import getDB from '../../../lib/db';
+import getDB, { initDB } from '../../../lib/db';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 
@@ -24,10 +24,11 @@ export async function GET(request) {
       return NextResponse.json({ error: 'صلاحية أدمن مطلوبة' }, { status: 403 });
     }
 
+    await initDB();
     const db = getDB();
 
     // 1. جلب العملاء
-    const clients = db.prepare(`
+    const clientsResult = await db.execute(`
       SELECT 
         u.id,
         u.full_name AS fullName,
@@ -39,10 +40,10 @@ export async function GET(request) {
       LEFT JOIN client_profiles cp ON u.id = cp.user_id
       WHERE u.role = 'client'
       ORDER BY u.created_at DESC
-    `).all();
+    `);
 
     // 2. جلب مقدمي الخدمة
-    const providers = db.prepare(`
+    const providersResult = await db.execute(`
       SELECT 
         u.id,
         u.full_name AS fullName,
@@ -60,9 +61,12 @@ export async function GET(request) {
       INNER JOIN provider_profiles pp ON u.id = pp.user_id
       WHERE u.role = 'serviceProvider'
       ORDER BY u.created_at DESC
-    `).all();
+    `);
 
-    return NextResponse.json({ clients, providers }, { status: 200 });
+    return NextResponse.json({
+      clients: clientsResult.rows,
+      providers: providersResult.rows,
+    }, { status: 200 });
 
   } catch (error) {
     console.error('❌ Error fetching dashboard users:', error);

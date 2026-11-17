@@ -15,9 +15,6 @@ const protectedRoutes = [
   '/provider',
 ];
 
-// الصفحات الخاصة بالأدمن فقط
-const adminOnlyRoutes = ['/dashboard'];
-
 // صفحات Auth (مسموح بها لغير المسجلين فقط)
 const authRoutes = [
   '/auth/login',
@@ -43,6 +40,23 @@ export function middleware(request) {
   const isValidToken = !!decoded;
   const userRole = decoded?.role || null;
 
+  // ============ حماية Dashboard (أدمن فقط) ============
+  if (pathname.startsWith('/dashboard')) {
+    // صفحة تسجيل دخول الأدمن مسموح بها فقط لمن ليس أدمن
+    if (pathname === '/dashboard/login') {
+      if (isValidToken && userRole === 'admin') {
+        return NextResponse.redirect(new URL('/dashboard', request.url));
+      }
+      return NextResponse.next();
+    }
+
+    // بقية صفحات الـ dashboard تتطلب تسجيل دخول كـ admin
+    if (!isValidToken || userRole !== 'admin') {
+      return NextResponse.redirect(new URL('/dashboard/login', request.url));
+    }
+    return NextResponse.next();
+  }
+
   // ============ الصفحة الرئيسية / ============
   if (pathname === '/') {
     if (isValidToken) {
@@ -55,18 +69,6 @@ export function middleware(request) {
   // ============ لو مسجل دخول وحاول يوصل لصفحة Auth ============
   if (pathname.startsWith('/auth') && isValidToken) {
     return NextResponse.redirect(new URL('/home', request.url));
-  }
-
-  // ============ حماية Dashboard (أدمن فقط) ============
-  const isDashboard = adminOnlyRoutes.some((route) => pathname.startsWith(route));
-  if (isDashboard) {
-    if (!isValidToken) {
-      return NextResponse.redirect(new URL('/auth/login', request.url));
-    }
-    if (userRole !== 'admin') {
-      // لو مش أدمن → يروح الصفحة الرئيسية
-      return NextResponse.redirect(new URL('/home', request.url));
-    }
   }
 
   // ============ حماية الصفحات العامة ============

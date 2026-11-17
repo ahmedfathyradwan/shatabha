@@ -31,6 +31,11 @@ const navItems = [
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
 
+  // عدم تطبيق الـ Sidebar والـ Layout على صفحة تسجيل الدخول الخاصة باللوحة
+  if (pathname === '/dashboard/login') {
+    return <>{children}</>;
+  }
+
   return (
     <div className={styles.wrapper} dir="rtl">
       {/* Sidebar */}

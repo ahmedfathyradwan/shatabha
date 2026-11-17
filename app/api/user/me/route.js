@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
-import prisma from '../../../lib/prisma';
+import getDB from '../../../lib/db';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 
@@ -26,13 +26,31 @@ export async function GET(request) {
       );
     }
 
-    const user = await prisma.user.findUnique({
-      where: { id: decoded.id },
-      include: {
-        clientProfile: true,
-        providerProfile: true,
-      },
-    });
+    const db = getDB();
+
+    const user = db.prepare(`
+      SELECT 
+        u.id, 
+        u.phone, 
+        u.full_name AS fullName, 
+        u.role, 
+        u.is_verified AS isVerified, 
+        u.created_at AS createdAt,
+        cp.avatar_url AS clientAvatar,
+        pp.provider_type AS providerType,
+        pp.address,
+        pp.specialization,
+        pp.job_title AS jobTitle,
+        pp.avg_price AS avgPrice,
+        pp.exhibition_type AS exhibitionType,
+        pp.rating,
+        pp.bio,
+        pp.avatar_url AS providerAvatar
+      FROM users u
+      LEFT JOIN client_profiles cp ON u.id = cp.user_id
+      LEFT JOIN provider_profiles pp ON u.id = pp.user_id
+      WHERE u.id = ?
+    `).get(decoded.id);
 
     if (!user) {
       return NextResponse.json(
@@ -47,24 +65,24 @@ export async function GET(request) {
       phone: user.phone,
       role: user.role,
       userType: user.role,
-      isVerified: user.isVerified,
+      isVerified: Boolean(user.isVerified),
       createdAt: user.createdAt,
     };
 
-    if (user.role === 'serviceProvider' && user.providerProfile) {
-      userData.providerType = user.providerProfile.providerType;
-      userData.address = user.providerProfile.address;
-      userData.specialization = user.providerProfile.specialization;
-      userData.jobTitle = user.providerProfile.jobTitle;
-      userData.avgPrice = user.providerProfile.avgPrice;
-      userData.exhibitionType = user.providerProfile.exhibitionType;
-      userData.rating = user.providerProfile.rating;
-      userData.bio = user.providerProfile.bio;
-      userData.avatarUrl = user.providerProfile.avatarUrl;
+    if (user.role === 'serviceProvider') {
+      userData.providerType = user.providerType;
+      userData.address = user.address;
+      userData.specialization = user.specialization;
+      userData.jobTitle = user.jobTitle;
+      userData.avgPrice = user.avgPrice;
+      userData.exhibitionType = user.exhibitionType;
+      userData.rating = user.rating;
+      userData.bio = user.bio;
+      userData.avatarUrl = user.providerAvatar;
     }
 
-    if (user.role === 'client' && user.clientProfile) {
-      userData.avatarUrl = user.clientProfile.avatarUrl;
+    if (user.role === 'client') {
+      userData.avatarUrl = user.clientAvatar;
     }
 
     return NextResponse.json({ user: userData }, { status: 200 });

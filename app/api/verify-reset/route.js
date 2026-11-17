@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '../../lib/prisma';
+import getDB from '../../lib/db';
 
 // POST /api/verify-reset - التحقق من OTP لإعادة تعيين كلمة المرور (بدون تفعيل الحساب)
 export async function POST(request) {
@@ -14,7 +14,8 @@ export async function POST(request) {
       );
     }
 
-    const user = await prisma.user.findUnique({ where: { phone } });
+    const db = getDB();
+    const user = db.prepare('SELECT * FROM users WHERE phone = ?').get(phone);
 
     if (!user) {
       return NextResponse.json(
@@ -23,14 +24,14 @@ export async function POST(request) {
       );
     }
 
-    if (!user.otpCode || user.otpCode !== otp.toString()) {
+    if (!user.otp_code || user.otp_code !== otp.toString()) {
       return NextResponse.json(
         { error: 'كود التحقق غير صحيح' },
         { status: 400 }
       );
     }
 
-    if (!user.otpExpiresAt || new Date() > new Date(user.otpExpiresAt)) {
+    if (!user.otp_expires_at || new Date() > new Date(user.otp_expires_at)) {
       return NextResponse.json(
         { error: 'كود التحقق منتهي الصلاحية، يرجى طلب كود جديد' },
         { status: 400 }

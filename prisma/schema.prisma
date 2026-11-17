@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ===========================
+// جدول المستخدمين الأساسي
+// ===========================
+model User {
+  id        Int      @id @default(autoincrement())
+  phone     String   @unique
+  password  String
+  fullName  String
+  role      String   // "client" | "serviceProvider" | "admin"
+  isVerified Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // علاقة مع بيانات العميل
+  clientProfile   ClientProfile?
+  // علاقة مع بيانات مقدم الخدمة
+  providerProfile ProviderProfile?
+
+  // OTP للتحقق
+  otpCode      String?
+  otpExpiresAt DateTime?
+
+  @@map("users")
+}
+
+// ===========================
+// بيانات العميل
+// ===========================
+model ClientProfile {
+  id     Int  @id @default(autoincrement())
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // بيانات إضافية للعميل (يمكن إضافتها لاحقاً)
+  avatarUrl String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("client_profiles")
+}
+
+// ===========================
+// بيانات مقدم الخدمة
+// ===========================
+model ProviderProfile {
+  id     Int  @id @default(autoincrement())
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // نوع مقدم الخدمة: "company" | "freelancer" | "exhibition"
+  providerType String
+
+  // بيانات مشتركة
+  address  String?
+  avatarUrl String?
+  bio       String?
+  rating    Float? @default(0)
+
+  // بيانات الشركة / المكتب
+  specialization String? // تخصص الشركة
+
+  // بيانات الفريلانسر
+  jobTitle String?
+  avgPrice Float?
+
+  // بيانات المعرض (materials/exhibition)
+  exhibitionType String? // نوع المعرض
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("provider_profiles")
+}

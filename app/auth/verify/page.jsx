@@ -8,7 +8,7 @@ export default function VerifyPage() {
   const router = useRouter();
   const [code, setCode] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [purpose, setPurpose] = useState('register'); // الحالة الافتراضية
+  const [purpose, setPurpose] = useState('register');
   const [message, setMessage] = useState('');
   const [seconds, setSeconds] = useState(30);
   const [canResend, setCanResend] = useState(false);
@@ -48,7 +48,8 @@ export default function VerifyPage() {
 
       if (res.ok) {
         setMessage('✅ تم إرسال كود جديد');
-        console.log('📨 كود جديد:', data.otp);
+        // في وضع التطوير: اطبع الكود في console
+        if (data.otp) console.log('📨 كود جديد:', data.otp);
       } else {
         setMessage(data.error || 'حدث خطأ أثناء إعادة الإرسال');
       }
@@ -64,7 +65,11 @@ export default function VerifyPage() {
     setMessage('');
 
     try {
-      const res = await fetch('/api/verify', {
+      // لو purpose هو reset → نتحقق من OTP بس من غير تفعيل الحساب
+      // لو purpose هو register → نفعّل الحساب
+      const endpoint = purpose === 'reset' ? '/api/verify-reset' : '/api/verify';
+
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone: phoneNumber, otp: code }),
@@ -73,11 +78,16 @@ export default function VerifyPage() {
       const data = await res.json();
 
       if (res.ok) {
-        setMessage('✅ تم تأكيد الحساب بنجاح');
+        setMessage('✅ تم التحقق بنجاح');
         localStorage.removeItem('registerData');
 
         setTimeout(() => {
           if (purpose === 'reset') {
+            // حفظ الرقم لصفحة إعادة تعيين كلمة المرور
+            localStorage.setItem(
+              'registerData',
+              JSON.stringify({ phone: phoneNumber, purpose: 'reset', verified: true })
+            );
             router.push('/auth/resetpassword');
           } else {
             router.push('/auth/login');

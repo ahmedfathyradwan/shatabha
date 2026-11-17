@@ -1,36 +1,83 @@
-import { NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
+import { NextResponse } from 'next/server';
+import jwt from 'jsonwebtoken';
 
-const SECRET = process.env.JWT_SECRET || "supersecret";
+const SECRET = process.env.JWT_SECRET || 'supersecret';
+
+// الصفحات المحمية - تحتاج تسجيل دخول فقط
+const protectedRoutes = [
+  '/home',
+  '/profile',
+  '/donationPosts',
+  '/offersPost',
+  '/finishChoice',
+  '/online',
+  '/maintenance',
+  '/provider',
+];
+
+// الصفحات الخاصة بالأدمن فقط
+const adminOnlyRoutes = ['/dashboard'];
+
+// صفحات Auth (مسموح بها لغير المسجلين فقط)
+const authRoutes = [
+  '/auth/login',
+  '/auth/register',
+  '/auth/forgetpassword',
+  '/auth/resetpassword',
+  '/auth/verify',
+];
 
 export function middleware(request) {
   const { pathname } = request.nextUrl;
+  const token = request.cookies.get('token')?.value || null;
 
-  // أي زيارة للصفحة الرئيسية
-  if (pathname === "/") {
-    const token = request.cookies.get("token")?.value || null;
-
-    if (!token) {
-      // لا يوجد توكن → redirect مباشرة للـ home
-      const homeUrl = new URL("/home", request.url);
-      return NextResponse.redirect(homeUrl);
-    }
-
+  let decoded = null;
+  if (token) {
     try {
-      jwt.verify(token, SECRET);
-      return NextResponse.next(); // توكن صالح → السماح بالدخول
+      decoded = jwt.verify(token, SECRET);
     } catch {
-      // توكن غير صالح → redirect للـ home
-      const homeUrl = new URL("/home", request.url);
-      return NextResponse.redirect(homeUrl);
+      decoded = null;
     }
   }
 
-  // الصفحات العامة مثل /login أو /api/login /api/logout
+  const isValidToken = !!decoded;
+  const userRole = decoded?.role || null;
+
+  // ============ الصفحة الرئيسية / ============
+  if (pathname === '/') {
+    if (isValidToken) {
+      return NextResponse.redirect(new URL('/home', request.url));
+    } else {
+      return NextResponse.redirect(new URL('/auth/login', request.url));
+    }
+  }
+
+  // ============ لو مسجل دخول وحاول يوصل لصفحة Auth ============
+  if (pathname.startsWith('/auth') && isValidToken) {
+    return NextResponse.redirect(new URL('/home', request.url));
+  }
+
+  // ============ حماية Dashboard (أدمن فقط) ============
+  const isDashboard = adminOnlyRoutes.some((route) => pathname.startsWith(route));
+  if (isDashboard) {
+    if (!isValidToken) {
+      return NextResponse.redirect(new URL('/auth/login', request.url));
+    }
+    if (userRole !== 'admin') {
+      // لو مش أدمن → يروح الصفحة الرئيسية
+      return NextResponse.redirect(new URL('/home', request.url));
+    }
+  }
+
+  // ============ حماية الصفحات العامة ============
+  const isProtected = protectedRoutes.some((route) => pathname.startsWith(route));
+  if (isProtected && !isValidToken) {
+    return NextResponse.redirect(new URL('/auth/login', request.url));
+  }
+
   return NextResponse.next();
 }
 
-// matcher لجميع الصفحات (عدا ملفات النظام)
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|api).*)'],
 };

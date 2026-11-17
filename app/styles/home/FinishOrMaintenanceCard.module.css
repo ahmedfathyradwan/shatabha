@@ -17,6 +17,14 @@
     margin: -0.5rem 0 -2.5rem;
     font-family: var(--ar);
 }
+    .container2 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+        gap: 3rem;
+    }
 .description {
     font-size: var(--fs-body);
     text-align: center;
@@ -71,7 +79,7 @@
 
 .cardDescription {
     margin-bottom: -0.6rem;
-    font-size: var(--fs-body);
+    font-size: var(--fs-small);
     font-family: var(--ar);
     font-weight: 400;
 }
@@ -97,4 +105,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+@media (min-width: 768px) {
+    .container2 {
+        flex-direction: row;
+    }
 }

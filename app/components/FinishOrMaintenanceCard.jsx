@@ -27,6 +27,7 @@ export default function FinishOrMaintenanceCard() {
     <>
     <div className={styles.container}>
       <h1 className={styles.title}>خدماتنا</h1>
+      <div className={styles.container2}>  
       {cards.map((card, index) => (
         <div
           key={index}
@@ -58,6 +59,7 @@ export default function FinishOrMaintenanceCard() {
           </div>
         </div>
       ))}
+      </div>
     </div>
     </>
   );

@@ -10,6 +10,7 @@ export default function ResetPasswordPage() {
   const [newPassword, setNewPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('registerData'));
@@ -20,22 +21,40 @@ export default function ResetPasswordPage() {
     }
   }, []);
 
-  const handleReset = (e) => {
+  const handleReset = async (e) => {
     e.preventDefault();
+    setMessage('');
 
     if (newPassword.length < 6) {
       setMessage('❌ كلمة المرور يجب ألا تقل عن 6 أحرف');
       return;
     }
 
-    console.log('🔐 تغيير كلمة المرور:', phone, newPassword);
+    setLoading(true);
+    try {
+      const res = await fetch('/api/reset-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone, newPassword }),
+      });
 
-    localStorage.removeItem('registerData');
-    setMessage('✅ تم تغيير كلمة المرور بنجاح');
+      const data = await res.json();
 
-    setTimeout(() => {
-      router.push('/auth/login');
-    }, 1500);
+      if (res.ok) {
+        localStorage.removeItem('registerData');
+        setMessage('✅ تم تغيير كلمة المرور بنجاح');
+        setTimeout(() => {
+          router.push('/auth/login');
+        }, 1500);
+      } else {
+        setMessage(`❌ ${data.error || 'حدث خطأ أثناء تغيير كلمة المرور'}`);
+      }
+    } catch (err) {
+      console.error(err);
+      setMessage('❌ حدث خطأ في الاتصال بالسيرفر');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -44,7 +63,7 @@ export default function ResetPasswordPage() {
         <h2 className={styles.title}>تغيير كلمة المرور</h2>
 
         <form className={styles.form} onSubmit={handleReset}>
-          <div className={styles.formGroup}>
+          <div className={styles.group}>
             <label className={styles.label}>رقم الهاتف</label>
             <input
               type="tel"
@@ -54,23 +73,23 @@ export default function ResetPasswordPage() {
             />
           </div>
 
-          <div className={styles.formGroup}>
+          <div className={styles.group}>
             <label className={styles.label}>كلمة المرور الجديدة</label>
             <div style={{ position: 'relative' }}>
               <input
                 type={showPassword ? 'text' : 'password'}
                 className={styles.input}
-                placeholder="********"
+                placeholder="أدخل كلمة المرور الجديدة"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 required
-                maxLength={6}
+                maxLength={20}
               />
             </div>
           </div>
 
-          <button type="submit" className={styles.button}>
-            تأكيد التغيير
+          <button type="submit" className={styles.button} disabled={loading}>
+            {loading ? 'جاري التغيير...' : 'تأكيد التغيير'}
           </button>
         </form>
 

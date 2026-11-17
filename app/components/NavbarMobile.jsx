@@ -19,20 +19,28 @@ export default function NavbarMobile() {
   useEffect(() => {
     setMounted(true);
 
-    // 🔹 تحديد رابط ملف المستخدم حسب نوع الحساب
+    // تحديد رابط ملف المستخدم حسب نوع الحساب
     try {
       const userDataRaw = localStorage.getItem("userData");
       if (userDataRaw) {
         const userData = JSON.parse(userDataRaw);
-        if (userData && userData.id && userData.userType) {
-          const link =
-            userData.userType === "client"
-              ? `/profile/client/${userData.id}`
-              : `/profile/provider/${userData.id}`;
+        if (userData && userData.id) {
+          const role = userData.role || userData.userType;
+          let link;
+
+          if (role === 'client') {
+            link = `/profile/client/${userData.id}`;
+          } else if (role === 'serviceProvider') {
+            link = `/profile/provider/${userData.id}`;
+          } else if (role === 'admin') {
+            link = '/dashboard';
+          } else {
+            link = '/home';
+          }
+
           setProfileLink(link);
-          console.log("Navbar mounted, profileLink set to:", link);
         } else {
-          setProfileLink("/home");
+          setProfileLink("/auth/login");
         }
       } else {
         setProfileLink("/auth/login");
@@ -44,7 +52,10 @@ export default function NavbarMobile() {
   }, []);
 
   const isProfileActive =
-    pathname.startsWith("/profile/client") || pathname.startsWith("/profile/provider");
+    pathname.startsWith("/profile/client") ||
+    pathname.startsWith("/profile/provider") ||
+    pathname.startsWith("/dashboard");
+
   const isActive = (path) => pathname === path;
 
   if (!mounted) return null;
@@ -73,10 +84,7 @@ export default function NavbarMobile() {
         {/* زر صفحة المستخدم */}
         <button
           type="button"
-          onClick={() => {
-            console.log("Clicked profile button, navigating to:", profileLink);
-            router.push(profileLink);
-          }}
+          onClick={() => router.push(profileLink)}
           className={`${styles.button} ${isProfileActive ? styles.activeTab : ""}`}
         >
           <UserIcon className={`${styles.icon} ${isProfileActive ? styles.activeIcon : ""}`} />
